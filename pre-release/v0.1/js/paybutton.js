@@ -410,7 +410,7 @@ function openModal(pbAttr) {
     '<img class="qrcode" src="' +
     qrImage +
     '" />' +
-    '<img class="qricon" src="https://paybutton.cash/images/bitcoincash_bare_logo.png" />' +
+    '<img class="qricon" src="https://github.com/SLPVH/spicebutton/blob/master/images/bitcoincash_bare_logo.png" />' +
     '<div id="copyDiv" class="qrctc">Click to Copy</div>' +
     '</div>' +
     '</div>' +
@@ -438,7 +438,7 @@ function openModal(pbAttr) {
     '\')" type="button"><span>Send with Badger Wallet</span></button></div> ' +
     '</div>' +
     '<div class="poweredbydiv">' +
-    '<div><span><a href="https://paybutton.cash" target="_blank" style="color: orangeRed; text-decoration: none;">Powered by PayButton.cash</a></span></div>' +
+    '<div><span><a href="https://spicebutton.com" target="_blank" style="color: orangeRed; text-decoration: none;">Powered by SPICE</a></span></div>' +
     '</div>' +
     '</div>' +
     '</div>';
@@ -604,7 +604,7 @@ function renderButtons(config) {
       // bch address attribute missing
       if (!toAddress) {
         alert(
-          'PayButton Error:\n\nBelow are the minimum button requirements\n\n1. address (Bitcoin Cash address)'
+          'Spice Button Error:\n\nBelow are the minimum button requirements\n\n1. address (Bitcoin Cash address)'
         );
         return;
       }
@@ -613,7 +613,7 @@ function renderButtons(config) {
       if (buttonAmount || amountType) {
         if (!buttonAmount || !amountType) {
           alert(
-            'PayButton Error:\n\nFor specific PayButton amounts, BOTH of the following MUST be set:\n\n1. amount (Must be a number)\n2. amount-type (Can be BCH, Satoshi, USD, AUD etc)\n\nTo allow "Any" amount, BOTH must be blank.'
+            'Spice Button Error:\n\nFor specific Spice Button amounts, BOTH of the following MUST be set:\n\n1. amount (Must be a number)\n2. amount-type (Can be BCH, Satoshi, USD, AUD etc)\n\nTo allow "Any" amount, BOTH must be blank.'
           );
           return;
         }
