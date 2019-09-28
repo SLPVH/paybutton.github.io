@@ -267,17 +267,10 @@ function txDialogue(pbAttr) {
 
 // * start of transaction listener
 function listenForTX(pbAttr) {
-  var addrConvert = new XMLHttpRequest();
-  addrConvert.open(
-    'GET',
-    'https://rest.imaginary.casg/v2/slp/convert/' + pbAttr,
-    true
-  );
-
   var txRequest = new XMLHttpRequest();
   txRequest.open(
     'GET',
-    'https://rest.imaginary.cash/v2/slp/transactions/' + spice + addrConvert.toAddress,
+    'https://rest.imaginary.cash/v2/slp/transactions/' + spice + pbAttr.toAddress,
     true
   );
 
