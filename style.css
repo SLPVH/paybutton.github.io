@@ -92,7 +92,7 @@ nav .nav-widget {
 }
 
 .tabs.active {
-  color: black;
+  color: red;
   background-color: white;
 }
 
@@ -101,14 +101,36 @@ nav .nav-widget {
   padding: 5%;
   width: 100%;
   height: calc(100% - 70px);
+  align-content: center;
+  text-align: left;
+}
+
+.launch-pos {
+  display: flex;
+  flex-direction: row;
+}
+.launch-pos button{
+  display: flex;
+  flex-direction: row;
+font-family: Ubuntu;
+font-size: 2em;
+font-style: italic;
+font-weight: bold;
+height: 50px;
+align-content: left;
+}
+
+.launch-pos button img{
+  position: relative;
+  height:100%;
 }
 
 .pos {
-  background-color: blue;
+
 }
 
 .widget {
-  background-color: greenyellow;
+
 }
 
 /* Global Helper Classes */
