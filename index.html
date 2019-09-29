@@ -38,25 +38,24 @@
 
     <div class="tab-content pos">
       <h1>Point of Sale</h1>
-      <div class="slp-address-field">
-        <span>SLP Address:</span>
-        <input id="slp-address-input" type="text" name="" value="">
-      </div>
+      
       <div class="">
-        <span>Currency Options:</span>
         <form class="" action="" method="post">
-          <input type="radio" name="Price in Spice" value="">
+          <span>SLP Address:</span>
+          <input id="slp-address-input" type="text" name="" value="" placeholder="simpleledger:qr2neczcfzmf5q729jhsj2jg3mcyrmw8vg2tg2ef4x" pattern="^(simpleledger:)?(q|p)[a-z0-9]{41}$"> <br>
+          <span>Currency Options:</span>
+          <input type="radio" name="option" value="" autocomplete="off">
           Price in Spice <br>
-          <input type="radio" name="" value="">
+          <input type="radio" name="option" data-target="#fiat-price-input" onchange="optionalInput(event)" autocomplete="off">
           <!-- rates will be fetched from coingecko API -->
-          Use fiat currency <br>
-          <input type="text" name="" value="" placeholder="USD"> <br>
+          Enter fiat currency <br>
+          <input id="fiat-price-input" class="hide" type="text" name="" value="" placeholder="e.g. USD, CAD, JPY"> <br>
+          <!--
           <input type="checkbox" name="" value="">
           Set my own rates: <br>
-          1 <span>Spice</span> = <input type="number" name="" value=""> <span>USD</span>
-
-
-
+          <span>1 Spice =</span>
+          <input id="spice-rate-input" type="number" name="" value="" readonly> <br>
+          -->
         </form>
       </div>
       <div class="launch-pos">
