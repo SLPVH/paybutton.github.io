@@ -98,11 +98,13 @@ nav .nav-widget {
 
 .tab-content {
   position: relative;
-  padding: 5%;
+  padding: 0 2.5%;
   width: 100%;
-  height: calc(100% - 70px);
-  align-content: center;
+  margin-top: 2.5%;
+  height: calc(100% - 70px - 7.5%);
+  align-content: left;
   text-align: left;
+  overflow-y: scroll;
 }
 
 .launch-pos {
@@ -112,12 +114,16 @@ nav .nav-widget {
 .launch-pos button{
   display: flex;
   flex-direction: row;
-font-family: Ubuntu;
-font-size: 2em;
-font-style: italic;
-font-weight: bold;
-height: 50px;
-align-content: left;
+  font-family: Ubuntu;
+  font-size: 2em;
+  font-style: italic;
+  font-weight: bold;
+  height: 50px;
+  align-content: left;
+  border-radius: 4px;
+  padding: 5px 12px;
+  margin-top: 30px;
+  width: 100%;
 }
 
 .launch-pos button img{
@@ -126,11 +132,52 @@ align-content: left;
 }
 
 .pos {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+  width: 100%;
+  max-width: 400px;
+}
 
+.pos > h1 {
+  text-align: center;
 }
 
 .widget {
+  
+}
 
+.widget * {
+  margin-top: 12px;
+}
+
+pre {
+  white-space: pre-wrap; 
+  background-color: rgb(58, 56, 56);
+  color: white;
+}
+
+/* Form Stying */
+form > span {
+  margin-top: 12px;
+  display: block;
+}
+input[type=text], input[type=number] {
+  position: relative;
+  line-height: 30px;
+  font-size: 18px;
+  text-indent: 6px;
+  width: 100%;
+  max-width: 300px;
+}
+
+#fiat-price-input {
+  margin: 0 !important;
+}
+
+#spice-rate-input::before {
+  background-color: red;
+  content: 'USD';
 }
 
 /* Global Helper Classes */

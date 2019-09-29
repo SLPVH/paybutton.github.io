@@ -30,3 +30,19 @@ function tabSelect(event) {
     contentEl.classList.remove('hide');
     contentEl.classList.add('show');
 }
+
+/**
+ * @function
+ * @param {event} event 
+ * This is called on an event from an element (radio) that detemines whether to show or hide a optional form element.
+ * TODO: only called when radio is selected. Doesn't call on deselected.
+ */
+function optionalInput(event) {
+    var isOn = event.target.checked;
+
+    var contentElSelector = event.target.getAttribute('data-target');
+    var contentEl = document.querySelector(contentElSelector);
+
+    contentEl.classList.remove('hide');
+    contentEl.classList.add('show');
+}
