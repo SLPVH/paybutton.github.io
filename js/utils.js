@@ -33,7 +33,7 @@ function tabSelect(event) {
 
 /**
  * @function
- * @param {event} event 
+ * @param {event} event
  * This is called on an event from an element (radio) that detemines whether to show or hide a optional form element.
  * TODO: only called when radio is selected. Doesn't call on deselected.
  */
@@ -45,4 +45,153 @@ function optionalInput(event) {
 
     contentEl.classList.remove('hide');
     contentEl.classList.add('show');
+}
+
+//Point of sale Code
+
+var slpAddress = "bitcoincash:qpamktwakukx236jsynwg7df4c53wrhlssqm7sragn";
+var currencyUnit = "USD";
+var decimalPlaces = 0;
+var runningTotal = 0;
+var runningTotalStr="0";
+
+//document.onload='spiceStartFunction()';
+
+function spiceStartFunction() {
+  console.log("Start Function");
+  getUrlData(location.href);
+}
+
+function getUrlData(str) {
+  //var str=location.href;
+  str = str.split("?");
+  if (str[1]) {
+    str = str[1].split("&");
+    var obj = {};
+    for (var i = 0; i < str.length; i++) {
+      var p = str[i].split("=");
+      var q = p[0];
+      var r = p[1];
+      obj[q] = r;
+    }
+    //console.log(obj);
+    if (obj.address) {
+      slpAddress = obj.address;
+
+      if (obj.currency) {
+        currencyUnit = obj.currency;
+        document.getElementById('pay-button').setAttribute("amount-type", currencyUnit);
+
+        if (!(currencyUnit == "USD" || currencyUnit == "BCH")) {
+          var opt = document.createElement('option');
+          opt.value = currencyUnit;
+          opt.innerHTML = currencyUnit;
+          document.getElementById('currency').appendChild(opt);
+        }
+        document.getElementById('currency').value = currencyUnit;
+      }
+      //if true, then
+      if (obj.decimal) {
+        decimalPlaces = obj.decimal;
+      }
+      openKeypad();
+    }
+    //return obj;
+  } else {
+    console.log("No opening URL parameters found");
+  }
+
+}
+
+function changeCountryCode() {
+  //console.log("changeCountryCode()");
+  var cCode = prompt("Please Enter Country Code:", "+");
+  document.getElementById('customCode').innerHTML = cCode;
+  document.getElementById('customCode').value = cCode;
+
+}
+
+function submitTel() {
+  var num = document.getElementById("countryCode").value + document.getElementById("phoneInput").value;
+  num = num.split('');
+  var num2 = [];
+  for (var i = 0; i < num.length; i++) {
+    num[i] = parseInt(num[i]);
+    if (!(isNaN(num[i]))) {
+      num2.push(num[i]);
+    }
+  }
+  var num3 = 0;
+  for (var i = 0; i < num2.length; i++) {
+    num3 *= 10;
+    num3 += num2[i];
+  }
+  //console.log(num3);
+  //phoneInput=num3;
+  window.open(location.href + "?phone=" + num3, "_self")
+}
+
+function openKeypad() {
+  document.getElementById("keypadWindow").style.display = "block";
+  updateKeypad();
+}
+
+function keyPress(keyInput) {
+  switch (keyInput) {
+    // case -2: {
+    //   decimalPlaces++;
+    //   //updateKeypad();
+    // }
+    //break;
+  case -1: {
+    // runningTotal /= 10;
+    // runningTotal = (Math.trunc(runningTotal * Math.pow(10, decimalPlaces))) / Math.pow(10, decimalPlaces);
+    // // runningTotal-=(keyInput*=0.01);
+    if (runningTotalStr.length==1) {
+      runningTotalStr="0";
+    } else {
+      runningTotalStr=runningTotalStr.slice(0, -1);
+    }
+
+    updateKeypad();
+  }
+  break;
+  default: {
+    //use the concat() method
+    if (runningTotalStr==="0") {
+      runningTotalStr=keyInput;
+    } else {
+      runningTotalStr=runningTotalStr.concat(keyInput);
+    }
+    // runningTotal *= 10;
+    // runningTotal += (keyInput *= Math.pow(10, -decimalPlaces));
+    updateKeypad();
+  }
+
+  }
+}
+
+function updateKeypad() {
+  document.getElementById("numberAreaParagraph").innerHTML = runningTotalStr;   //.toFixed(decimalPlaces);
+  runningTotal=parseFloat(runningTotalStr);
+  document.getElementById("pay-button").setAttribute("amount", runningTotal);   //.toFixed(decimalPlaces));
+}
+
+// function changeCurrency() {
+//   var currency = document.getElementById("currency").value;
+//   if (currency == "custom") {
+//     currency = prompt("Enter a custom currency ticker:");
+//     currency = currency.toUpperCase();
+//   }
+//   var url = location.href;
+//   if (url.indexOf("&currency=") >= 0) {
+//     var myURL = url.replace("&currency=" + currencyUnit,"");
+//     url=myURL;
+//   }
+//   window.open(url + "&currency=" + currency);
+// }
+
+function goToHomePage() {
+  //replace this with standard link when site is live.
+  window.open(location.origin);
 }

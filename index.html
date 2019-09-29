@@ -16,7 +16,7 @@
   <script src="./js/utils.js"></script>
 </head>
 
-<body class="homepage">
+<body class="homepage" onload="spiceStartFunction()">
   <div class="header">
     <img src="https://spicetoken.org/img/placeholders/media_files/spice_master_trans_bg_black_outer_no_text.svg" alt="">
     <h1>SpiceButton</h1>
@@ -38,7 +38,7 @@
 
     <div class="tab-content pos">
       <h1>Point of Sale</h1>
-      
+
       <div class="">
         <form class="" action="" method="post">
           <span>SLP Address:</span>
@@ -208,6 +208,59 @@
 
       </div>
     </div>
+  </div>
+<!-- point of sale code-->
+<div id="keypadWindow" class="keypad">
+  <div class="top">
+    <div class="panel">
+      <div class="">
+
+      </div>
+      <!-- <div class="currencyMenu">
+        <select id="currency" onchange="changeCurrency()">
+          <option value="USD">USD</option>
+          <option value="BCH">BCH</option>
+          <option id="customCurrency" value="custom">custom</option>
+        </select>
+      </div> -->
+      <div class="closeKeypad">
+        <!--will point to textBCH.com later on-->
+        <a href="#"onclick="goToHomePage()">X</a>
+      </div>
+    </div>
+    <div class="numberArea">
+      <p id="numberAreaParagraph">0</p>
+    </div>
+  </div>
+  <div class=buttonArea>
+    <!-- <div class="buttonRow"> -->
+    <button type="button" name="button" onclick="keyPress('1')" value="1">1</button>
+    <button type="button" name="button" onclick="keyPress('2')" value="2">2</button>
+    <button type="button" name="button" onclick="keyPress('3')" value="3">3</button>
+    <!-- </div>
+    <div class="buttonRow"> -->
+    <button type="button" name="button" onclick="keyPress('4')" value="4">4</button>
+    <button type="button" name="button" onclick="keyPress('5')" value="5">5</button>
+    <button type="button" name="button" onclick="keyPress('6')" value="6">6</button>
+    <!-- </div>
+    <div class="buttonRow"> -->
+    <button type="button" name="button" onclick="keyPress('7')" value="7">7</button>
+    <button type="button" name="button" onclick="keyPress('8')" value="8">8</button>
+    <button type="button" name="button" onclick="keyPress('9')" value="9">9</button>
+    <!-- </div>
+    <div class="buttonRow"> -->
+    <button type="button" name="button" onclick="keyPress('.')" value=".">.</button>
+    <button type="button" name="button" onclick="keyPress('0')" value="0">0</button>
+    <button type="button" name="button" onclick="keyPress(-1)" value="del">&#8678;</button>
+    <!-- </div> -->
+  </div>
+
+  <div class="proceed">
+    <script src="https://alt-win.github.io/paybutton.github.io/pre-release/v0.1/js/paybutton.min.js">
+    </script>
+    <button type="button" name="button" class="pay-button" id="pay-button" button-text="Next" button-text-2="" amount="0" amount-type="USD" address="bitcoincash:qpamktwakukx236jsynwg7df4c53wrhlssqm7sragn" success-msg="" paywall-field=""
+      success-callback="">
+    </button>
   </div>
 
 </body>
