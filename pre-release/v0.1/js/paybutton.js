@@ -264,7 +264,7 @@ function txDialogue(pbAttr) {
 // * end of show transaction message
 
 // * start of transaction listener
-function listenForTX(pbAttr) {
+
   var txRequest = new XMLHttpRequest();
   txRequest.open(
     'GET',
