@@ -112,23 +112,33 @@ nav .nav-widget {
   flex-direction: row;
 }
 .launch-pos button{
-  display: flex;
-  flex-direction: row;
   font-family: Ubuntu;
   font-size: 2em;
   font-style: italic;
   font-weight: bold;
-  height: 50px;
+  line-height: 50px;
   align-content: left;
+  vertical-align: middle;
   border-radius: 4px;
   padding: 5px 12px;
   margin-top: 30px;
   width: 100%;
+  border: 2px solid black;
+  background-color: transparent;
+  outline: none;
+  transition: all 0.25s linear;
+  cursor: pointer;
+}
+
+.launch-pos button:hover {
+  transform: scale(1.1);
+  background-color: red;
+  color: white;
 }
 
 .launch-pos button img{
   position: relative;
-  height:100%;
+  height: 1em;
 }
 
 .pos {
