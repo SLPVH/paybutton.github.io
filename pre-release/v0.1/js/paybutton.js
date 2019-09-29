@@ -209,8 +209,6 @@ function getRandomSat() {
 
 // * start of start/stop transaction listen
 var txListen;
-const spice = "4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf"
-
 
 function startListenForTX(pbAttr) {
   pbAttr.timeStamp = Math.floor(Date.now() / 1000);
@@ -266,18 +264,11 @@ function txDialogue(pbAttr) {
 // * end of show transaction message
 
 // * start of transaction listener
-function listenForTX(pbAttr) {
-  var addrConvert = new XMLHttpRequest();
-  addrConvert.open(
-    'GET',
-    'https://rest.imaginary.cash/v2/slp/convert/' + pbAttr,
-    true
-  );
 
   var txRequest = new XMLHttpRequest();
   txRequest.open(
     'GET',
-    'https://rest.imaginary.cash/v2/slp/transactions/' + spice + addrConvert.toAddress,
+    'https://rest.imaginary.cash/v2/slp/transactions/' + pbAttr.toAddress,
     true
   );
 
@@ -447,7 +438,7 @@ function openModal(pbAttr) {
     '\')" type="button"><span>Send with Badger Wallet</span></button></div> ' +
     '</div>' +
     '<div class="poweredbydiv">' +
-    '<div><span><a href="spicebutton.com" target="_blank" style="color: orangeRed; text-decoration: none;">Powered by SPICE</a></span></div>' +
+    '<div><span><a href="https://spicebutton.com" target="_blank" style="color: orangeRed; text-decoration: none;">Powered by SPICE</a></span></div>' +
     '</div>' +
     '</div>' +
     '</div>';
