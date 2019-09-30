@@ -91,10 +91,13 @@ function getUrlData(str) {
     //console.log(obj);
     if (obj.address) {
       slpAddress = obj.address;
+      document.getElementById("pay-button").setAttribute("address", slpAddress);
+
 
       if (obj.currency) {
         currencyUnit = obj.currency;
         document.getElementById('pay-button').setAttribute("amount-type", currencyUnit);
+
 
         // if (!(currencyUnit == "USD" || currencyUnit == "BCH")) {
         //   var opt = document.createElement('option');
