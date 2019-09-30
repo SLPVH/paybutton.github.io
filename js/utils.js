@@ -50,7 +50,7 @@ function optionalInput(event) {
 //Point of sale Code
 
 var slpAddress = "";
-var currencyUnit = "Spice";
+var currencyUnit = "";
 var decimalPlaces = 0;
 var runningTotal = 0;
 var runningTotalStr="0";
