@@ -91,9 +91,9 @@ if (!document.getElementById(qrId)) {
       window.getComputedStyle(this.modal).height;
       this.modal.className =
         this.modal.className +
-        (this.modal.offsetHeight > window.innerHeight
-          ? ' paybutton-open paybutton-anchored'
-          : ' paybutton-open');
+        (this.modal.offsetHeight > window.innerHeight ?
+          ' paybutton-open paybutton-anchored' :
+          ' paybutton-open');
       this.overlay.className = this.overlay.className + ' paybutton-open';
       window.payButtonModalOpen = true;
     }
@@ -165,7 +165,7 @@ if (!document.getElementById(qrId)) {
       this.overlay.addEventListener('click', this.close.bind(this));
     }
     document.getElementById('bch-open').addEventListener('click', function() {
-      this.innerHTML = '<span>Opening Spice Wallet</span>';
+      this.innerHTML = '<span>Opening SLP Wallet</span>';
     });
   }
 
@@ -186,7 +186,7 @@ function copyBCHURI(address) {
   inp.select();
   document.execCommand('copy', false, null);
   inp.remove();
-  //alert("Spice address copied!");
+  //alert("Bitcoin Cash address copied!");
   document.getElementById('copyDiv').innerHTML = '<span>Address Copied!</span>';
 }
 // * end of copy BCH URI to clipboard
@@ -264,11 +264,11 @@ function txDialogue(pbAttr) {
 // * end of show transaction message
 
 // * start of transaction listener
-
+function listenForTX(pbAttr) {
   var txRequest = new XMLHttpRequest();
   txRequest.open(
     'GET',
-    'https://rest.imaginary.cash/v2/slp/transactions/' + pbAttr.toAddress,
+    'https://rest.bitcoin.com/v2/address/unconfirmed/' + pbAttr.toAddress,
     true
   );
 
@@ -284,7 +284,7 @@ function txDialogue(pbAttr) {
         var getTransactions = txData.utxos[i];
 
         if (pbAttr.timeStamp < getTransactions.ts) {
-          if (getTransactions.amount == pbAttr.bchAmount) {
+          if (getTransactions.amount) {
             stopListenForTX();
 
             pbAttr.txid = getTransactions.txid;
@@ -372,11 +372,14 @@ function sendToBadger(
 function openModal(pbAttr) {
   // qr code generation
   if (pbAttr.anyAmount) {
-    pbAttr.amountMessage = 'Send any amount of Spice';
+    pbAttr.amountMessage = 'Send any amount of Bitcoin Cash';
     pbAttr.URI = pbAttr.toAddress;
   } else {
     pbAttr.URI = pbAttr.toAddress + '?amount=' + pbAttr.bchAmount;
-    startListenForTX(pbAttr);
+    //var bchaddress =
+    startListenForTX(pbAttr.toAddress);
+    //startListenForTX(bchaddress);
+    //setTimeout(startListenForTX(bchaddress), 1000);
   }
 
   var qrParams = {
@@ -410,7 +413,7 @@ function openModal(pbAttr) {
     '<img class="qrcode" src="' +
     qrImage +
     '" />' +
-    '<img class="qricon" src="https://spicebutton.com/images/bitcoincash_bare_logo.png" />' +
+    '<img class="qricon" src="./images/bitcoincash_bare_logo.png" />' +
     '<div id="copyDiv" class="qrctc">Click to Copy</div>' +
     '</div>' +
     '</div>' +
@@ -422,7 +425,7 @@ function openModal(pbAttr) {
     '<div>' +
     '<div><button id="bch-open" class="pay-button pb-modal-button" onclick="location.href=\'' +
     pbAttr.URI +
-    '\'" type="button"><span>Send with BCH Wallet</span></button></div>' +
+    '\'" type="button"><span>Send with SLP Wallet</span></button></div>' +
     '</div>' +
     '<div>' +
     '<div><button id="badger-open" class = "pay-button pb-modal-button" onclick="sendToBadger(\'' +
@@ -438,7 +441,7 @@ function openModal(pbAttr) {
     '\')" type="button"><span>Send with Badger Wallet</span></button></div> ' +
     '</div>' +
     '<div class="poweredbydiv">' +
-    '<div><span><a href="https://spicebutton.com" target="_blank" style="color: orangeRed; text-decoration: none;">Powered by SPICE</a></span></div>' +
+    '<div><span><a href="https://spicebutton.com" target="_blank" style="color: orangeRed; text-decoration: none;">Powered by spicebutton.com</a></span></div>' +
     '</div>' +
     '</div>' +
     '</div>';
@@ -450,30 +453,77 @@ function openModal(pbAttr) {
   pbModal.open();
 }
 // * end of open model
+// function convertToBchAddr(simpleledgeraddress) {
+//   var conversion = new XMLHttpRequest();
+//   conversion.open(
+//     'GET',
+//     'https://rest.bitcoin.com/v2/slp/convert/' + simpleledgeraddress,
+//     true
+//   );
+//
+//
+//
+//   conversion.onload = function() {
+//     var addrData = JSON.parse(conversion.responseText);
+//     console.log(addrData["cashAddress"]);
+//     return addrData["cashAddress"];
+//   }
+//   conversion.onerror = function() {
+//     console.log("error");
+//   }
+//   //conversion.send();
+//
+// }
+
+// function convertToBchAddr(simpleledgeraddress) {
+//   var req = new XMLHttpRequest();
+//   const url = 'https://rest.bitcoin.com/v2/slp/convert/' + simpleledgeraddress;
+//   req.open('GET', url, false);
+//   req.send();
+//   var jsonResponse = JSON.parse(req.responseText);
+//   var bcha = jsonResponse["cashAddress"];
+//   console.log(bcha);
+//   startListenForTX(bcha);
+//
+//   //return bcha;
+// }
+
 
 // * start of begin function query to obtain bch price
+// * function getBCHPrice(pbAttr) {
+// *   var fiatRequest = new XMLHttpRequest();
+// *   fiatRequest.open(
+// *     'GET',
+// *     'https://index-api.bitcoin.com/api/v0/cash/price/' + pbAttr.amountType,
+// *     true
+// *   );
+
+
 function getBCHPrice(pbAttr) {
   var fiatRequest = new XMLHttpRequest();
   fiatRequest.open(
     'GET',
-    'https://index-api.bitcoin.com/api/v0/cash/price/' + pbAttr.amountType,
+    'https://api.coingecko.com/api/v3/simple/price?ids=spice&vs_currencies=' + pbAttr.amountType,
     true
   );
 
   fiatRequest.onload = function() {
     if (fiatRequest.readyState == 4 && fiatRequest.status == 200) {
       var fiatData = JSON.parse(fiatRequest.responseText);
+      // let sprice=fiatData["spice"]["USD"];
+      // console.log(sprice);
 
-      if (fiatData.price != '') {
+      if (fiatData != '') {
         // determine amount of satoshi based on button value
-        var addDecimal = fiatData.price / 100;
-        var satAmount = (1 / addDecimal) * pbAttr.buttonAmount;
+        //var addDecimal = fiatData.pbAttr.amountType / 100;
+        var satAmount = (1 / fiatData["spice"][pbAttr.amountType.toLowerCase()]) * pbAttr.buttonAmount;
         pbAttr.satAmount = satAmount.toFixed(8);
 
         // add small amount of random sats for slightly more acurate success dialogue
-        pbAttr.randSat = getRandomSat();
-        var bchAmount = Number(pbAttr.satAmount) + Number(pbAttr.randSat);
+        pbAttr.randSat = 0;
+        var bchAmount = Number(pbAttr.satAmount);
         pbAttr.bchAmount = bchAmount.toFixed(8);
+
 
         pbAttr.amountMessage =
           pbAttr.buttonAmount +
@@ -481,7 +531,7 @@ function getBCHPrice(pbAttr) {
           pbAttr.amountType +
           ' = ' +
           pbAttr.bchAmount +
-          ' BCH';
+          ' SPICE';
 
         openModal(pbAttr);
       } else {
@@ -497,7 +547,13 @@ function getBCHPrice(pbAttr) {
   };
 
   fiatRequest.send();
-}
+
+  fiatRequest.onerror = function() {
+    console.log('Could Not Connect To Server');
+  };
+
+  fiatRequest.send();
+};
 // * end of begin function query to obtain bch price
 
 // insert info into button on mouseover
@@ -512,7 +568,7 @@ function mouseEnter() {
     showType = showType.trim().toUpperCase();
     buttonText2 = showAmount + ' ' + showType;
     if (!showAmount || !showType) {
-      buttonText2 = 'Click to send BCH';
+      buttonText2 = 'Click to send Spice';
     }
   }
   this.innerHTML = '<span>&nbsp</span>';
@@ -604,7 +660,7 @@ function renderButtons(config) {
       // bch address attribute missing
       if (!toAddress) {
         alert(
-          'Spice Button Error:\n\nBelow are the minimum button requirements\n\n1. address (Spice address)'
+          'Spice Button Error:\n\nBelow are the minimum button requirements\n\n1. address (Bitcoin Cash SLP address)'
         );
         return;
       }
@@ -631,7 +687,7 @@ function renderButtons(config) {
         openModal(pbAttr);
       } else {
         // check if amount type is set to bch or fiat
-        if (amountType == 'BCH' || amountType == 'SATOSHI') {
+        if (amountType == 'SPICE' || amountType == 'SATOSHI') {
           var satAmount = buttonAmount;
           if (amountType == 'SATOSHI') {
             satAmount = satAmount / 100000000;
@@ -639,12 +695,12 @@ function renderButtons(config) {
           pbAttr.satAmount = satAmount.toFixed(8);
 
           // add small amount of random sats for slightly more acurate success dialogue
-          pbAttr.randSat = getRandomSat();
+          pbAttr.randSat = 0;
           bchAmount = Number(pbAttr.satAmount) + Number(pbAttr.randSat);
-          pbAttr.bchAmount = bchAmount.toFixed(8);
+          pbAttr.bchAmount = bchAmount;
 
           // display bch amount in modal
-          pbAttr.amountMessage = 'Amount = ' + pbAttr.bchAmount + ' BCH';
+          pbAttr.amountMessage = 'Amount = ' + pbAttr.bchAmount + ' SPICE';
 
           // send bch tx data to modal
           openModal(pbAttr);
@@ -659,7 +715,9 @@ function renderButtons(config) {
 
 // DOM listen
 document.addEventListener('DOMContentLoaded', function() {
-  renderButtons({ onDemand: false });
+  renderButtons({
+    onDemand: false
+  });
 });
 
 var Paybutton = {
@@ -704,6 +762,8 @@ var Paybutton = {
       newBtn.setAttribute('success-callback', config.success_callback);
     }
     elem.parentNode.replaceChild(newBtn, elem);
-    renderButtons({ onDemand: true });
+    renderButtons({
+      onDemand: true
+    });
   }
 };

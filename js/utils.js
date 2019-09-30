@@ -50,7 +50,7 @@ function optionalInput(event) {
 //Point of sale Code
 
 var slpAddress = "";
-var currencyUnit = "";
+var currencyUnit = "Spice";
 var decimalPlaces = 0;
 var runningTotal = 0;
 var runningTotalStr="0";
@@ -93,11 +93,9 @@ function getUrlData(str) {
       slpAddress = obj.address;
       document.getElementById("pay-button").setAttribute("address", slpAddress);
 
-
       if (obj.currency) {
         currencyUnit = obj.currency;
         document.getElementById('pay-button').setAttribute("amount-type", currencyUnit);
-
 
         // if (!(currencyUnit == "USD" || currencyUnit == "BCH")) {
         //   var opt = document.createElement('option');
