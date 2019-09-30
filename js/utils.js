@@ -49,11 +49,25 @@ function optionalInput(event) {
 
 //Point of sale Code
 
-var slpAddress = "bitcoincash:qpamktwakukx236jsynwg7df4c53wrhlssqm7sragn";
-var currencyUnit = "USD";
+var slpAddress = "";
+var currencyUnit = "Spice";
 var decimalPlaces = 0;
 var runningTotal = 0;
 var runningTotalStr="0";
+
+function launchPos() {
+  let address=document.getElementById('slp-address-input').value;
+  let currency=document.getElementById('fiat-price-input').value;
+  if (address) {
+    if (currency) {
+      currencyUnit=currency;
+    }
+    slpAddress=address;
+    window.open(location.href+"?address="+address+"&currency="+currencyUnit);
+  } else {
+    alert("Please enter a valid SLP address");
+  }
+}
 
 //document.onload='spiceStartFunction()';
 
@@ -82,18 +96,18 @@ function getUrlData(str) {
         currencyUnit = obj.currency;
         document.getElementById('pay-button').setAttribute("amount-type", currencyUnit);
 
-        if (!(currencyUnit == "USD" || currencyUnit == "BCH")) {
-          var opt = document.createElement('option');
-          opt.value = currencyUnit;
-          opt.innerHTML = currencyUnit;
-          document.getElementById('currency').appendChild(opt);
-        }
-        document.getElementById('currency').value = currencyUnit;
+        // if (!(currencyUnit == "USD" || currencyUnit == "BCH")) {
+        //   var opt = document.createElement('option');
+        //   opt.value = currencyUnit;
+        //   opt.innerHTML = currencyUnit;
+        //   document.getElementById('currency').appendChild(opt);
+        // }
+        // document.getElementById('currency').value = currencyUnit;
       }
       //if true, then
-      if (obj.decimal) {
-        decimalPlaces = obj.decimal;
-      }
+      // if (obj.decimal) {
+      //   decimalPlaces = obj.decimal;
+      //}
       openKeypad();
     }
     //return obj;
@@ -103,33 +117,33 @@ function getUrlData(str) {
 
 }
 
-function changeCountryCode() {
-  //console.log("changeCountryCode()");
-  var cCode = prompt("Please Enter Country Code:", "+");
-  document.getElementById('customCode').innerHTML = cCode;
-  document.getElementById('customCode').value = cCode;
-
-}
-
-function submitTel() {
-  var num = document.getElementById("countryCode").value + document.getElementById("phoneInput").value;
-  num = num.split('');
-  var num2 = [];
-  for (var i = 0; i < num.length; i++) {
-    num[i] = parseInt(num[i]);
-    if (!(isNaN(num[i]))) {
-      num2.push(num[i]);
-    }
-  }
-  var num3 = 0;
-  for (var i = 0; i < num2.length; i++) {
-    num3 *= 10;
-    num3 += num2[i];
-  }
-  //console.log(num3);
-  //phoneInput=num3;
-  window.open(location.href + "?phone=" + num3, "_self")
-}
+// function changeCountryCode() {
+//   //console.log("changeCountryCode()");
+//   var cCode = prompt("Please Enter Country Code:", "+");
+//   document.getElementById('customCode').innerHTML = cCode;
+//   document.getElementById('customCode').value = cCode;
+//
+// }
+//
+// function submitTel() {
+//   var num = document.getElementById("countryCode").value + document.getElementById("phoneInput").value;
+//   num = num.split('');
+//   var num2 = [];
+//   for (var i = 0; i < num.length; i++) {
+//     num[i] = parseInt(num[i]);
+//     if (!(isNaN(num[i]))) {
+//       num2.push(num[i]);
+//     }
+//   }
+//   var num3 = 0;
+//   for (var i = 0; i < num2.length; i++) {
+//     num3 *= 10;
+//     num3 += num2[i];
+//   }
+//   //console.log(num3);
+//   //phoneInput=num3;
+//   window.open(location.href + "?phone=" + num3, "_self");
+// }
 
 function openKeypad() {
   document.getElementById("keypadWindow").style.display = "block";
