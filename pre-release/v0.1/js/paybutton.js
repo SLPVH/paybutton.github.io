@@ -165,7 +165,7 @@ if (!document.getElementById(qrId)) {
       this.overlay.addEventListener('click', this.close.bind(this));
     }
     document.getElementById('bch-open').addEventListener('click', function() {
-      this.innerHTML = '<span>Opening Bitcoin Cash Wallet</span>';
+      this.innerHTML = '<span>Opening Spice Wallet</span>';
     });
   }
 
@@ -186,7 +186,7 @@ function copyBCHURI(address) {
   inp.select();
   document.execCommand('copy', false, null);
   inp.remove();
-  //alert("Bitcoin Cash address copied!");
+  //alert("Spice address copied!");
   document.getElementById('copyDiv').innerHTML = '<span>Address Copied!</span>';
 }
 // * end of copy BCH URI to clipboard
@@ -372,7 +372,7 @@ function sendToBadger(
 function openModal(pbAttr) {
   // qr code generation
   if (pbAttr.anyAmount) {
-    pbAttr.amountMessage = 'Send any amount of Bitcoin Cash';
+    pbAttr.amountMessage = 'Send any amount of Spice';
     pbAttr.URI = pbAttr.toAddress;
   } else {
     pbAttr.URI = pbAttr.toAddress + '?amount=' + pbAttr.bchAmount;
@@ -537,9 +537,9 @@ function buttonDefaultText() {
     showAmount = Number(showAmount.trim());
     var showType = this.getAttribute('amount-type') || '';
     showType = showType.trim().toUpperCase();
-    buttonText = 'Send Bitcoin Cash';
+    buttonText = 'Send Spice';
     if (!showAmount || !showType) {
-      buttonText = 'Send Bitcoin Cash';
+      buttonText = 'Send Spice';
     }
   }
   this.innerHTML = '<span>&nbsp</span>';
@@ -604,7 +604,7 @@ function renderButtons(config) {
       // bch address attribute missing
       if (!toAddress) {
         alert(
-          'Spice Button Error:\n\nBelow are the minimum button requirements\n\n1. address (Bitcoin Cash address)'
+          'Spice Button Error:\n\nBelow are the minimum button requirements\n\n1. address (Spice address)'
         );
         return;
       }
