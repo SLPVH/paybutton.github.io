@@ -265,7 +265,7 @@ function txDialogue(pbAttr) {
 
 // * start of transaction listener
 function listenForTX(pbAttr) {
-  var address = pbAttr.toAddress.replace("simpleledger:", "");
+  var address = pbAttr.toAddress;  //.replace("simpleledger:", "");
   var query = {
     "v": 3,
     "q": {
