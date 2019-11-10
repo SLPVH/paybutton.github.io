@@ -265,46 +265,46 @@ function txDialogue(pbAttr) {
 
 // * start of transaction listener
 function listenForTX(pbAttr) {
-  var txRequest = new XMLHttpRequest();
-  txRequest.open(
-    'GET',
-    'https://rest.bitcoin.com/v2/address/unconfirmed/' + pbAttr.toAddress,
-    true
-  );
+  var address = pbAttr.toAddress.replace("simpleledger:", "");
+  var query = {
+    "v": 3,
+    "q": {
+      "find": {
+        "slp.detail.tokenIdHex": "4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf",
+        "out.e.a": address
+      }
+    }
+  }
 
-  txRequest.onload = function() {
-    if (txRequest.readyState == 4 && txRequest.status == 200) {
-      console.log('listening for transaction..');
+  var txRequest = new EventSource('https://slpsocket.fountainhead.cash/s/' + btoa(JSON.stringify(query)))
 
-      var txData = JSON.parse(txRequest.responseText);
+  txRequest.onmessage = function(event) {
+    console.log('listening for transaction..');
 
-      //console.log(pbAttr.randSat, pbAttr.satAmount, pbAttr.bchAmount)
+    var txData = JSON.parse(event.data);
 
-      for (var i = 0; i < txData.utxos.length; i++) {
-        var getTransactions = txData.utxos[i];
+    //var tx = JSON.parse(event.data);
+    if (txData.type == 'mempool') {
+      for (var i = 0; i < txData.data[0].out.length; i++) {
+        if (txData.data[0].out[i].e.a == address) {
+          var bchReceived = txData.data[0].out[i].e.v / 100000000;
+          var sender = txData.data[0].in[0].e.a;
+          var txid = txData.data[0].tx.h;
+          if (bchReceived == pbAttr.bchAmount) {
+            txRequest.close();
 
-        if (pbAttr.timeStamp < getTransactions.ts) {
-          if (getTransactions.amount) {
             stopListenForTX();
-
-            pbAttr.txid = getTransactions.txid;
-
+            //
+            pbAttr.txid = txid;
+            //
             txDialogue(pbAttr);
 
             return;
-          } // for if amount is equal
-        } // for timestamp
-      } // for i
-    } else {
-      console.log('Found Server But There Is An Error');
+          }
+        }
+      }
     }
-  }; // for onload
-
-  txRequest.onerror = function() {
-    console.log('Could Not Connect To Server');
-  };
-
-  txRequest.send();
+  }
 }
 // * end of transaction listener
 
