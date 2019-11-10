@@ -377,7 +377,7 @@ function openModal(pbAttr) {
   } else {
     pbAttr.URI = pbAttr.toAddress + '?amount=' + pbAttr.bchAmount;
     //var bchaddress =
-    startListenForTX(pbAttr.toAddress);
+    startListenForTX(pbAttr);
     //startListenForTX(bchaddress);
     //setTimeout(startListenForTX(bchaddress), 1000);
   }
