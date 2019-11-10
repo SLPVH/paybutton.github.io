@@ -285,12 +285,12 @@ function listenForTX(pbAttr) {
 
     //var tx = JSON.parse(event.data);
     if (txData.type == 'mempool') {
-      for (var i = 0; i < txData.data[0].out.length; i++) {
-        if (txData.data[0].out[i].e.a == address) {
-          var bchReceived = txData.data[0].out[i].e.v / 100000000;
-          var sender = txData.data[0].in[0].e.a;
+      for (var i = 0; i < txData.data[0].slp.detail.outputs.length; i++) {
+        if (txData.data[0].slp.detail.outputs.[i].address == address) {
+          var spiceReceived = txData.data[0].slp.detail.outputs.[i].amount;
+          //var sender = txData.data[0].in[0].e.a;
           var txid = txData.data[0].tx.h;
-          if (bchReceived == pbAttr.bchAmount) {
+          if (spiceReceived == pbAttr.bchAmount) {
             txRequest.close();
 
             stopListenForTX();
