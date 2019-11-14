@@ -333,7 +333,7 @@ function sendToBadger(
       var txParams = {
         to: toAddress,
         from: web4bch.bch.defaultAccount,
-        value: bchAmount
+        value: bchAmount,
         sendTokenData: {
           tokenId: '4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf',
           tokenProtocol: 'slp'
