@@ -1,3 +1,5 @@
+const spiceID="4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf";
+
 var cssButtonId = 'pbButtonCSS';
 if (!document.getElementById(cssButtonId)) {
   var head = document.getElementsByTagName('head')[0];
@@ -270,7 +272,7 @@ function listenForTX(pbAttr) {
     "v": 3,
     "q": {
       "find": {
-        "slp.detail.tokenIdHex": "4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf",
+        "slp.detail.tokenIdHex": spiceID,
         "out.e.a": address
       }
     }
@@ -316,7 +318,8 @@ function sendToBadger(
   paywallField,
   successCallback
 ) {
-  
+
+
   if (typeof web4bch !== 'undefined') {
     web4bch = new Web4Bch(web4bch.currentProvider);
 
@@ -334,7 +337,7 @@ function sendToBadger(
         from: web4bch.bch.defaultAccount,
         value: bchAmount,
         sendTokenData: {
-          tokenId: '4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf',
+          tokenId: spiceID,
           tokenProtocol: 'slp'
         }
       };
@@ -427,7 +430,7 @@ function openModal(pbAttr) {
     '</div>' +
     '<div>' +
     '<div><button id="bch-open" class="pay-button pb-modal-button" onclick="location.href=\'' +
-    pbAttr.URI +
+    pbAttr.URI +'-'+spiceID+
     '\'" type="button"><span>Send with SLP Wallet</span></button></div>' +
     '</div>' +
     '<div>' +
