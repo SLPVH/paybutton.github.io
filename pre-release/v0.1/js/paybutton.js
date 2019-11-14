@@ -316,8 +316,7 @@ function sendToBadger(
   paywallField,
   successCallback
 ) {
-  bchAmount = bchAmount * 100000000;
-
+  
   if (typeof web4bch !== 'undefined') {
     web4bch = new Web4Bch(web4bch.currentProvider);
 
