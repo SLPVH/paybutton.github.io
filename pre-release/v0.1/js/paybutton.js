@@ -265,7 +265,7 @@ function txDialogue(pbAttr) {
 
 // * start of transaction listener
 function listenForTX(pbAttr) {
-  var address = pbAttr.toAddress;  //.replace("simpleledger:", "");
+  var address = pbAttr.toAddress; //.replace("simpleledger:", "");
   var query = {
     "v": 3,
     "q": {
@@ -334,6 +334,10 @@ function sendToBadger(
         to: toAddress,
         from: web4bch.bch.defaultAccount,
         value: bchAmount
+        sendTokenData: {
+          tokenId: '4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf',
+          tokenProtocol: 'slp'
+        }
       };
 
       // check for errors else proceed with success messages
