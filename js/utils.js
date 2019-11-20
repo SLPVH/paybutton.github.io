@@ -63,7 +63,7 @@ function launchPos() {
     if (currency) {
       currencyUnit = currency;
 
-      switch (currencyUnit) {
+      switch (currency) {
         case "USD":
           currencySymbol = "$";
           break;
