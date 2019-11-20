@@ -1,5 +1,5 @@
 /* begin default button set */
-.pay-button, .pay-button:hover {
+.spice-button, .spice-button:hover {
     all: initial;
     font-family: Helvetica Neu, Arial, sans-serif !important;
     font-size: 17px !important;
@@ -18,10 +18,10 @@
     display: block !important;
     z-index: 1 !important;
     }
-    
-    
-    
-    .pay-button > span {
+
+
+
+    .spice-button > span {
     display: inline-block;
     padding: 12px 8px;
     position: relative;
@@ -30,8 +30,8 @@
     -webkit-text-fill-color: transparent;
     z-index: -1;
     }
-    
-    .pay-button:after {
+
+    .spice-button:after {
     content: "";
     position: absolute;
     top: 0;
@@ -42,69 +42,69 @@
     font-size: 18px;
     z-index: -5;
     }
-    
-    .pay-button > span,.pay-button:after {
+
+    .spice-button > span,.spice-button:after {
     background-size: 300%;
     background-position: 100%;
     transition: .8s, font-weight .5s;
     }
-    
-    .pay-button:hover > span,.pay-button:hover:after {
+
+    .spice-button:hover > span,.spice-button:hover:after {
     font-weight: 500;
     background-position: 0;
     }
-    
-    .pay-button:active{
+
+    .spice-button:active{
     transform: translateY(1px);
     opacity: 0.95;
     box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.20);
     }
-    
+
     .rev {
-    
+
     }
     .rev:hover {
-    
+
     }
-    
+
     .rev > span {
     background: linear-gradient(45deg, #ff0000 50%, #FFFFFF 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     }
-    
+
     .rev:after {
     background: linear-gradient(45deg, transparent 50%, #ff0000 50%);
     }
-    
+
     .rev > span, .rev:after {
     background-size: 300%;
     background-position: 100%;
     }
-    
+
     .bare, .bare:hover {
     border: 0px !important;
     background: transparent !important;
     /*For IE*/
     }
-    
+
     .bare > span {
     background: linear-gradient(45deg, #FFF 50%, #ff0000 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     }
-    
+
     .bare:after {
     background: linear-gradient(45deg, #ff0000 50%, transparent 50%);
     }
-    
+
     .bare > span, .bare:after {
     background-size: 300%;
     background-position: 100%;
     }
     /* end default button set */
-    
-    
+
+
     /* begin wa button set */
     .wa, .wa:hover {
     border: 2px solid #34495e !important;
@@ -122,7 +122,7 @@
     background-size: 300%;
     background-position: 100%;
     }
-    
+
     .warev, .warev:hover {
     border: 2px solid #34495e !important;
     background: transparent !important;
@@ -139,7 +139,7 @@
     background-size: 300%;
     background-position: 100%;
     }
-    
+
     .wabare, .wabare:hover {
     border: 0px !important;
     background: transparent !important;
@@ -158,8 +158,8 @@
     background-position: 100%;
     }
     /* end wa button set */
-    
-    
+
+
     /* begin spice button set */
     .spice, .spice:hover {
     font-size: 24px !important;
@@ -171,30 +171,30 @@
     width: 280px !important;
     /*For IE*/
     }
-    
+
     .spice > span {
     padding: 18px 8px;
     background: linear-gradient(45deg, #FFFFFF 50%, #ED2B55 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     }
-    
+
     .spice:after {
     background: linear-gradient(45deg, #ED2B55 50%, transparent 50%);
     }
-    
+
     .spice > span,.spice:after {
     background-size: 300%;
     background-position: 100%;
     transition: .8s, font-weight .2s;
     }
-    
+
     .spice:hover > span,.spice:hover:after {
     font-weight: normal;
     }
     /* begin spice button set */
-    
-    
+
+
     /* begin spicerev button set */
     .spicerev, .spicerev:hover {
     font-size: 24px !important;
@@ -206,30 +206,30 @@
     width: 280px !important;
     /*For IE*/
     }
-    
+
     .spicerev > span {
     padding: 18px 8px;
     background: linear-gradient(45deg, #ED2B55 50%, #FFFFFF 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     }
-    
+
     .spicerev:after {
     background: linear-gradient(45deg, transparent 50%, #ED2B55 50%);
     }
-    
+
     .spicerev > span,.spicerev:after {
     background-size: 300%;
     background-position: 100%;
     transition: .8s, font-weight .2s;
     }
-    
+
     .spicerev:hover > span,.spicerev:hover:after {
     font-weight: normal;
     }
     /* begin spicerev button set */
-    
-    
+
+
     /* begin modal button */
     .pb-modal-button, .pb-modal-button:hover {
     width: 254px !important;
@@ -251,4 +251,3 @@
     background-position: 100%;
     }
     /* end modal button */
-    

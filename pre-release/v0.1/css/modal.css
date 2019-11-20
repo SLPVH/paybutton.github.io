@@ -1,5 +1,5 @@
 /* Modal Base CSS */
-.paybutton-overlay {
+.spicebutton-overlay {
 position: fixed;
 z-index: 9998;
 top: 0;
@@ -15,7 +15,7 @@ transition: 1ms opacity ease;
 background: rgba(0,0,0,.6);
 }
 
-.paybutton-modal {
+.spicebutton-modal {
 all: initial;
 font-family: Helvetica Neu, Arial, sans-serif;
 font-size: 16px;
@@ -48,7 +48,7 @@ border-radius: 6px;
 background: #fff;
 }
 
-.paybutton-modal.paybutton-open.paybutton-anchored {
+.spicebutton-modal.spicebutton-open.spicebutton-anchored {
 top: 20px;
 
 -webkit-transform: translate(-50%, 0);
@@ -58,24 +58,24 @@ top: 20px;
 transform: translate(-50%, 0);
 }
 
-.paybutton-modal.paybutton-open {
+.spicebutton-modal.spicebutton-open {
 opacity: 1;
 }
 
-.paybutton-overlay.paybutton-open {
+.spicebutton-overlay.spicebutton-open {
 opacity: 1;
 
 }
 
 /* Default Animation */
 
-.paybutton-overlay.fade-and-drop {
+.spicebutton-overlay.fade-and-drop {
 display: block;
 
 opacity: 0;
 }
 
-.paybutton-modal.fade-and-drop {
+.spicebutton-modal.fade-and-drop {
 top: -300%;
 
 opacity: 1;
@@ -84,7 +84,7 @@ display: block;
 }
 
 /* speed of modal content entering window */
-.paybutton-modal.fade-and-drop.paybutton-open {
+.spicebutton-modal.fade-and-drop.spicebutton-open {
 top: 50%;
 
 -webkit-transition: 300ms top 300ms ease;
@@ -94,7 +94,7 @@ top: 50%;
 transition: 300ms top 300ms ease;
 }
 
-.paybutton-modal.fade-and-drop.paybutton-open.paybutton-anchored {
+.spicebutton-modal.fade-and-drop.spicebutton-open.spicebutton-anchored {
 
 -webkit-transition: 300ms top 300ms ease;
  -moz-transition: 300ms top 300ms ease;
@@ -104,7 +104,7 @@ transition: 300ms top 300ms ease;
 }
 
 /* speed of modal background entering window */
-.paybutton-overlay.fade-and-drop.paybutton-open {
+.spicebutton-overlay.fade-and-drop.spicebutton-open {
 top: 0;
 
 -webkit-transition: 300ms opacity ease;
@@ -117,7 +117,7 @@ opacity: 1;
 }
 
 /* speed of model close upward */
-.paybutton-modal.fade-and-drop {
+.spicebutton-modal.fade-and-drop {
 -webkit-transition: 700ms top ease;
  -moz-transition: 700ms top ease;
 -ms-transition: 700ms top ease;
@@ -126,7 +126,7 @@ transition: 700ms top ease;
 }
 
 /* speed of dark overlay exiting */
-.paybutton-overlay.fade-and-drop {
+.spicebutton-overlay.fade-and-drop {
 -webkit-transition: 300ms opacity 300ms ease;
  -moz-transition: 300ms opacity 300ms ease;
 -ms-transition: 300ms opacity 300ms ease;
@@ -134,7 +134,7 @@ transition: 700ms top ease;
 transition: 300ms opacity 300ms ease;
 }
 
-.paybutton-content {
+.spicebutton-content {
 	position: relative;
 	margin: auto;
 	display: block;
@@ -150,7 +150,7 @@ transition: 300ms opacity 300ms ease;
 
 .qrparent:active{
 
-  opacity: 0.95;  
+  opacity: 0.95;
 
 	padding: 2px;
   /* filter: saturate(80%);*/
