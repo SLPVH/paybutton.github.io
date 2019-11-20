@@ -91,11 +91,11 @@ function getUrlData(str) {
     //console.log(obj);
     if (obj.address) {
       slpAddress = obj.address;
-      document.getElementById("pay-button").setAttribute("address", slpAddress);
+      document.getElementById("spice-button").setAttribute("address", slpAddress);
 
       if (obj.currency) {
         currencyUnit = obj.currency;
-        document.getElementById('pay-button').setAttribute("amount-type", currencyUnit);
+        document.getElementById('spice-button').setAttribute("amount-type", currencyUnit);
 
         // if (!(currencyUnit == "USD" || currencyUnit == "BCH")) {
         //   var opt = document.createElement('option');
@@ -189,7 +189,7 @@ function keyPress(keyInput) {
 function updateKeypad() {
   document.getElementById("numberAreaParagraph").innerHTML = runningTotalStr;   //.toFixed(decimalPlaces);
   runningTotal=parseFloat(runningTotalStr);
-  document.getElementById("pay-button").setAttribute("amount", runningTotal);   //.toFixed(decimalPlaces));
+  document.getElementById("spice-button").setAttribute("amount", runningTotal);   //.toFixed(decimalPlaces));
 }
 
 // function changeCurrency() {
