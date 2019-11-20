@@ -6,29 +6,29 @@
  * This will show (css .show) the content of the tab clicked and hide (css .hide) all other content. It will also add .active class to tab selected.
  */
 function tabSelect(event) {
-    var contentElSelector = event.target.getAttribute('data-target');
-    var contentEl = document.querySelector(contentElSelector);
+  var contentElSelector = event.target.getAttribute('data-target');
+  var contentEl = document.querySelector(contentElSelector);
 
-    var otherTabEls = document.querySelectorAll('.tabs:not(' + contentElSelector + ')');
-    var otherContentEls = document.querySelectorAll('.tab-content:not(' + contentElSelector + ')');
+  var otherTabEls = document.querySelectorAll('.tabs:not(' + contentElSelector + ')');
+  var otherContentEls = document.querySelectorAll('.tab-content:not(' + contentElSelector + ')');
 
-    // remove active class from not selected tabs
-    otherTabEls.forEach(function(el) {
-        el.classList.remove('active');
-    });
+  // remove active class from not selected tabs
+  otherTabEls.forEach(function(el) {
+    el.classList.remove('active');
+  });
 
-    // hide all not selected tab content elements
-    otherContentEls.forEach(function(el) {
-        el.classList.remove('show');
-        el.classList.add('hide');
-    });
+  // hide all not selected tab content elements
+  otherContentEls.forEach(function(el) {
+    el.classList.remove('show');
+    el.classList.add('hide');
+  });
 
-    // add active class to selected tab
-    event.target.classList.add('active');
+  // add active class to selected tab
+  event.target.classList.add('active');
 
-    // show selected tab content
-    contentEl.classList.remove('hide');
-    contentEl.classList.add('show');
+  // show selected tab content
+  contentEl.classList.remove('hide');
+  contentEl.classList.add('show');
 }
 
 /**
@@ -38,32 +38,63 @@ function tabSelect(event) {
  * TODO: only called when radio is selected. Doesn't call on deselected.
  */
 function optionalInput(event) {
-    var isOn = event.target.checked;
+  var isOn = event.target.checked;
 
-    var contentElSelector = event.target.getAttribute('data-target');
-    var contentEl = document.querySelector(contentElSelector);
+  var contentElSelector = event.target.getAttribute('data-target');
+  var contentEl = document.querySelector(contentElSelector);
 
-    contentEl.classList.remove('hide');
-    contentEl.classList.add('show');
+  contentEl.classList.remove('hide');
+  contentEl.classList.add('show');
 }
 
 //Point of sale Code
 
 var slpAddress = "";
 var currencyUnit = "Spice";
+var currencySymbol = "";
 var decimalPlaces = 0;
 var runningTotal = 0;
-var runningTotalStr="0";
+var runningTotalStr = "0";
 
 function launchPos() {
-  let address=document.getElementById('slp-address-input').value;
-  let currency=document.getElementById('fiat-price-input').value;
+  let address = document.getElementById('slp-address-input').value;
+  let currency = document.getElementById('fiat-price-input').value;
   if (address) {
     if (currency) {
-      currencyUnit=currency;
+      currencyUnit = currency;
+
+      switch (currencyUnit) {
+        case "USD":
+          currencySymbol = "$";
+          break;
+        case "AUD":
+          currencySymbol = "$";
+          break;
+        case "CNY":
+          currencySymbol = "¥";
+          break;
+        case "JPY":
+          currencySymbol = "¥";
+          break;
+        case "GBP":
+          currencySymbol = "£";
+          break;
+        case "EUR":
+          currencySymbol = "€";
+          break;
+        case "CAD":
+          currencySymbol = "$";
+          break;
+        // case "":
+        //   currencySymbol = "";
+        //   break;
+        default:
+          currencySymbol = "";
+
+      }
     }
-    slpAddress=address;
-    window.open(location.href+"?address="+address+"&currency="+currencyUnit);
+    slpAddress = address;
+    window.open(location.href + "?address=" + address + "&currency=" + currencyUnit);
   } else {
     alert("Please enter a valid SLP address");
   }
@@ -158,25 +189,25 @@ function keyPress(keyInput) {
     //   //updateKeypad();
     // }
     //break;
-  case -1: {
-    // runningTotal /= 10;
-    // runningTotal = (Math.trunc(runningTotal * Math.pow(10, decimalPlaces))) / Math.pow(10, decimalPlaces);
-    // // runningTotal-=(keyInput*=0.01);
-    if (runningTotalStr.length==1) {
-      runningTotalStr="0";
-    } else {
-      runningTotalStr=runningTotalStr.slice(0, -1);
-    }
+    case -1: {
+      // runningTotal /= 10;
+      // runningTotal = (Math.trunc(runningTotal * Math.pow(10, decimalPlaces))) / Math.pow(10, decimalPlaces);
+      // // runningTotal-=(keyInput*=0.01);
+      if (runningTotalStr.length == 1) {
+        runningTotalStr = "0";
+      } else {
+        runningTotalStr = runningTotalStr.slice(0, -1);
+      }
 
-    updateKeypad();
-  }
-  break;
+      updateKeypad();
+    }
+    break;
   default: {
     //use the concat() method
-    if (runningTotalStr==="0") {
-      runningTotalStr=keyInput;
+    if (runningTotalStr === "0") {
+      runningTotalStr = keyInput;
     } else {
-      runningTotalStr=runningTotalStr.concat(keyInput);
+      runningTotalStr = runningTotalStr.concat(keyInput);
     }
     // runningTotal *= 10;
     // runningTotal += (keyInput *= Math.pow(10, -decimalPlaces));
@@ -187,9 +218,10 @@ function keyPress(keyInput) {
 }
 
 function updateKeypad() {
-  document.getElementById("numberAreaParagraph").innerHTML = runningTotalStr;   //.toFixed(decimalPlaces);
-  runningTotal=parseFloat(runningTotalStr);
-  document.getElementById("spice-button").setAttribute("amount", runningTotal);   //.toFixed(decimalPlaces));
+  document.getElementById("numberAreaParagraph").innerHTML = runningTotalStr; //.toFixed(decimalPlaces);
+  runningTotal=runningTotal.substr(1,runningTotal.length);
+  runningTotal = parseFloat(runningTotalStr);
+  document.getElementById("spice-button").setAttribute("amount", currencyUnit+runningTotal); //.toFixed(decimalPlaces));
 }
 
 // function changeCurrency() {
