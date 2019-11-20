@@ -218,10 +218,10 @@ function keyPress(keyInput) {
 }
 
 function updateKeypad() {
-  document.getElementById("numberAreaParagraph").innerHTML = runningTotalStr; //.toFixed(decimalPlaces);
-  runningTotal=runningTotal.replace(currencySymbol,"");
+  document.getElementById("numberAreaParagraph").innerHTML = currencySymbol+runningTotalStr; //.toFixed(decimalPlaces);
+  //runningTotal=runningTotal.replace(currencySymbol,"");
   runningTotal = parseFloat(runningTotalStr);
-  document.getElementById("spice-button").setAttribute("amount", currencySymbol+runningTotal); //.toFixed(decimalPlaces));
+  document.getElementById("spice-button").setAttribute("amount", runningTotal); //.toFixed(decimalPlaces));
 }
 
 // function changeCurrency() {
