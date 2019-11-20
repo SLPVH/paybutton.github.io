@@ -62,36 +62,6 @@ function launchPos() {
   if (address) {
     if (currency) {
       currencyUnit = currency;
-
-      switch (currency) {
-        case "USD":
-          currencySymbol = "$";
-          break;
-        case "AUD":
-          currencySymbol = "$";
-          break;
-        case "CNY":
-          currencySymbol = "¥";
-          break;
-        case "JPY":
-          currencySymbol = "¥";
-          break;
-        case "GBP":
-          currencySymbol = "£";
-          break;
-        case "EUR":
-          currencySymbol = "€";
-          break;
-        case "CAD":
-          currencySymbol = "$";
-          break;
-        // case "":
-        //   currencySymbol = "";
-        //   break;
-        default:
-          currencySymbol = "";
-
-      }
     }
     slpAddress = address;
     window.open(location.href + "?address=" + address + "&currency=" + currencyUnit);
@@ -128,6 +98,35 @@ function getUrlData(str) {
         currencyUnit = obj.currency;
         document.getElementById('spice-button').setAttribute("amount-type", currencyUnit);
 
+        switch (currencyUnit) {
+          case "USD":
+            currencySymbol = "$";
+            break;
+          case "AUD":
+            currencySymbol = "$";
+            break;
+          case "CNY":
+            currencySymbol = "¥";
+            break;
+          case "JPY":
+            currencySymbol = "¥";
+            break;
+          case "GBP":
+            currencySymbol = "£";
+            break;
+          case "EUR":
+            currencySymbol = "€";
+            break;
+          case "CAD":
+            currencySymbol = "$";
+            break;
+          // case "":
+          //   currencySymbol = "";
+          //   break;
+          default:
+            currencySymbol = "";
+
+        }
         // if (!(currencyUnit == "USD" || currencyUnit == "BCH")) {
         //   var opt = document.createElement('option');
         //   opt.value = currencyUnit;
