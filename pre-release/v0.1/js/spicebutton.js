@@ -378,7 +378,7 @@ function sendToBadger(
 function openModal(pbAttr) {
   // qr code generation
   if (pbAttr.anyAmount) {
-    pbAttr.amountMessage = 'Send any amount of Bitcoin Cash';
+    pbAttr.amountMessage = 'Send any amount of Spice';
     pbAttr.URI = pbAttr.toAddress;
   } else {
     pbAttr.URI = pbAttr.toAddress + '?amount=' + pbAttr.bchAmount;
