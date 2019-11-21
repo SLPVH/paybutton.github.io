@@ -51,6 +51,7 @@ function optionalInput(event) {
 
 var slpAddress = "";
 var currencyUnit = "Spice";
+var isSpice="";
 var currencySymbol = "";
 var decimalPlaces = 0;
 var runningTotal = 0;
@@ -126,6 +127,9 @@ function getUrlData(str) {
           default:
             currencySymbol = "";
 
+        }
+        if (currencyUnit=="Spice") {
+          isSpice=" Spice";
         }
         // if (!(currencyUnit == "USD" || currencyUnit == "BCH")) {
         //   var opt = document.createElement('option');
@@ -217,7 +221,7 @@ function keyPress(keyInput) {
 }
 
 function updateKeypad() {
-  document.getElementById("numberAreaParagraph").innerHTML = currencySymbol+runningTotalStr; //.toFixed(decimalPlaces);
+  document.getElementById("numberAreaParagraph").innerHTML = currencySymbol+runningTotalStr+isSpice; //.toFixed(decimalPlaces);
   //runningTotal=runningTotal.replace(currencySymbol,"");
   runningTotal = parseFloat(runningTotalStr);
   document.getElementById("spice-button").setAttribute("amount", runningTotal); //.toFixed(decimalPlaces));
