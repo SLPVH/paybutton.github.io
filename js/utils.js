@@ -221,6 +221,7 @@ function keyPress(keyInput) {
       } else {
         runningTotalStr = runningTotalStr.concat(keyInput);
       }
+      updateKeypad();
     }
     break;
   default: {
