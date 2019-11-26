@@ -51,7 +51,7 @@ function optionalInput(event) {
 
 var slpAddress = "";
 var currencyUnit = "Spice";
-var isSpice="";
+var isSpice = "";
 var currencySymbol = "";
 var decimalPlaces = 0;
 var runningTotal = 0;
@@ -121,15 +121,15 @@ function getUrlData(str) {
           case "CAD":
             currencySymbol = "$";
             break;
-          // case "":
-          //   currencySymbol = "";
-          //   break;
+            // case "":
+            //   currencySymbol = "";
+            //   break;
           default:
             currencySymbol = "";
 
         }
-        if (currencyUnit=="Spice") {
-          isSpice=" Spice";
+        if (currencyUnit == "Spice") {
+          isSpice = " Spice";
         }
         // if (!(currencyUnit == "USD" || currencyUnit == "BCH")) {
         //   var opt = document.createElement('option');
@@ -205,6 +205,24 @@ function keyPress(keyInput) {
       updateKeypad();
     }
     break;
+  case '.':
+    function containsDecimal() = {
+      var search = runningTotalStr.split('');
+      for (var i = 0; i < search.length; i++) {
+        if (search[i] == '.') {
+          return true;
+        }
+      }
+      return false;
+    }
+    if (!containsDecimal()) {
+      if (runningTotalStr === "0") {
+        runningTotalStr = "0.";
+      } else {
+        runningTotalStr = runningTotalStr.concat(keyInput);
+      }
+    }
+    break;
   default: {
     //use the concat() method
     if (runningTotalStr === "0") {
@@ -221,7 +239,7 @@ function keyPress(keyInput) {
 }
 
 function updateKeypad() {
-  document.getElementById("numberAreaParagraph").innerHTML = currencySymbol+runningTotalStr+isSpice; //.toFixed(decimalPlaces);
+  document.getElementById("numberAreaParagraph").innerHTML = currencySymbol + runningTotalStr + isSpice; //.toFixed(decimalPlaces);
   //runningTotal=runningTotal.replace(currencySymbol,"");
   runningTotal = parseFloat(runningTotalStr);
   document.getElementById("spice-button").setAttribute("amount", runningTotal); //.toFixed(decimalPlaces));
