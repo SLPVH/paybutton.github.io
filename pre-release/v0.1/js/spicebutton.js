@@ -1,4 +1,4 @@
-const spiceID="4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf";
+const spiceID = "4de69e374a8ed21cbddd47f2338cc0f479dc58daa2bbe11cd604ca488eca0ddf";
 
 var cssButtonId = 'pbButtonCSS';
 if (!document.getElementById(cssButtonId)) {
@@ -292,6 +292,18 @@ function listenForTX(pbAttr) {
           var spiceReceived = txData.data[0].slp.detail.outputs[i].amount;
           //var sender = txData.data[0].in[0].e.a;
           var txid = txData.data[0].tx.h;
+          if (pbAttr.anyAmount) {
+            successMsg = "Recieved " + spiceReceived;
+            txRequest.close();
+
+            stopListenForTX();
+            //
+            pbAttr.txid = txid;
+            //
+            txDialogue(pbAttr);
+
+            return;
+          }
           if (spiceReceived == pbAttr.bchAmount) {
             txRequest.close();
 
@@ -430,7 +442,7 @@ function openModal(pbAttr) {
     '</div>' +
     '<div>' +
     '<div><button id="bch-open" class="spice-button pb-modal-button" onclick="location.href=\'' +
-    pbAttr.URI +'-'+spiceID+
+    pbAttr.URI + '-' + spiceID +
     '\'" type="button"><span>Send with SLP Wallet</span></button></div>' +
     '</div>' +
     '<div>' +
