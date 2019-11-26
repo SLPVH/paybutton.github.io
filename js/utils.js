@@ -206,7 +206,7 @@ function keyPress(keyInput) {
     }
     break;
   case '.':
-    function containsDecimal() = {
+    function containsDecimal() {
       var search = runningTotalStr.split('');
       for (var i = 0; i < search.length; i++) {
         if (search[i] == '.') {
