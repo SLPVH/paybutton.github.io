@@ -672,7 +672,8 @@ function renderButtons(config) {
         toAddress: toAddress,
         successMsg: successMsg,
         paywallField: paywallField,
-        successCallback: successCallback
+        successCallback: successCallback,
+        anyAmount: false
       };
 
       // bch address attribute missing
