@@ -68,7 +68,7 @@ if (!document.getElementById(qrId)) {
 
   Modal.prototype.close = function() {
     if (window.payButtonModalOpen) {
-      stopListenForTX();
+      //stopListenForTX();
       var _ = this;
       this.modal.className = this.modal.className.replace(' spicebutton-open', '');
       this.overlay.className = this.overlay.className.replace(
@@ -214,14 +214,15 @@ var txListen;
 
 function startListenForTX(pbAttr) {
   pbAttr.timeStamp = Math.floor(Date.now() / 1000);
-  txListen = setInterval(function() {
+  /* txListen = setInterval(function() {
     listenForTX(pbAttr);
-  }, 60000); //1400);  Testing to see if interval looping is necessary
+  }, 60000); */ //1400);  Testing to see if interval looping is necessary
+  txListen = listenForTX(pbAttr);
 }
 
-function stopListenForTX() {
+/*function stopListenForTX() {
   clearInterval(txListen);
-}
+}*/
 // * end of start/stop transaction listen
 
 // * start of show transaction message
@@ -297,7 +298,7 @@ function listenForTX(pbAttr) {
               successMsg = "Recieved " + spiceReceived;
               txRequest.close();
 
-              stopListenForTX();
+              //stopListenForTX();
               //
               pbAttr.txid = txid;
               //
@@ -310,7 +311,7 @@ function listenForTX(pbAttr) {
           if (spiceReceived == pbAttr.bchAmount) {
             txRequest.close();
 
-            stopListenForTX();
+            //stopListenForTX();
             //
             pbAttr.txid = txid;
             //
@@ -365,7 +366,7 @@ function sendToBadger(
           //console.log("Error", err);
         } else {
 
-          stopListenForTX();
+          //stopListenForTX();
 
           var pbAttr = {
             txid: res,
