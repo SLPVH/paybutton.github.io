@@ -468,6 +468,38 @@ function openModal(pbAttr) {
     '</div>' +
     '</div>';
 
+  if (pbAttr.anyAmount) {
+    pbContent =
+      '<div>' +
+      '<div>' +
+      '<div>' +
+      '<div class="qrparent" onclick=copyBCHURI(\'' +
+      pbAttr.URI +
+      "')>" +
+      '<img class="qrcode" src="' +
+      qrImage +
+      '" />' +
+      '<img class="qricon" src="./images/bitcoincash_bare_logo.png" />' +
+      '<div id="copyDiv" class="qrctc">Click to Copy</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="dialoguediv">' +
+      '<div><span>' +
+      pbAttr.amountMessage +
+      '</span></div> ' +
+      '</div>' +
+      '<div>' +
+      '<div><button id="bch-open" class="spice-button pb-modal-button" onclick="location.href=\'' +
+      pbAttr.URI + '-' + spiceID +
+      '\'" type="button"><span>Send with SLP Wallet</span></button></div>' +
+      '</div>' +
+      '<div class="poweredbydiv">' +
+      '<div><span><a href="https://spicebutton.com" target="_blank" style="color: orangeRed; text-decoration: none;">Powered by spicebutton.com</a></span></div>' +
+      '</div>' +
+      '</div>' +
+      '</div>';
+  }
+
   var pbModal = new Modal({
     content: pbContent
   });
