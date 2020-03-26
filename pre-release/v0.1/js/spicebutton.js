@@ -293,17 +293,20 @@ function listenForTX(pbAttr) {
           //var sender = txData.data[0].in[0].e.a;
           var txid = txData.data[0].tx.h;
           if (pbAttr.anyAmount) {
-            successMsg = "Recieved " + spiceReceived;
-            txRequest.close();
+            if (spiceReceived > 0) {
+              successMsg = "Recieved " + spiceReceived;
+              txRequest.close();
 
-            stopListenForTX();
-            //
-            pbAttr.txid = txid;
-            //
-            txDialogue(pbAttr);
+              stopListenForTX();
+              //
+              pbAttr.txid = txid;
+              //
+              txDialogue(pbAttr);
 
-            return;
+              return;
+            }
           }
+
           if (spiceReceived == pbAttr.bchAmount) {
             txRequest.close();
 
@@ -395,11 +398,11 @@ function openModal(pbAttr) {
   } else {
     pbAttr.URI = pbAttr.toAddress + '?amount=' + pbAttr.bchAmount;
     //var bchaddress =
-    startListenForTX(pbAttr);
+
     //startListenForTX(bchaddress);
     //setTimeout(startListenForTX(bchaddress), 1000);
   }
-
+  startListenForTX(pbAttr);
   var qrParams = {
     ecclevel: 'Q',
     fillcolor: '#FFFFFF',
@@ -664,7 +667,7 @@ function renderButtons(config) {
 
       var bchAmount;
       var amountMessage;
-      var anyAmount=true;
+      var anyAmount;
 
       var pbAttr = {
         buttonAmount: buttonAmount,
@@ -693,15 +696,16 @@ function renderButtons(config) {
           );
           return;
         }
-        pbAttr.anyAmount=false;
-      } /*else {
-        pbAttr.anyAmount = true;
+        pbAttr.anyAmount = false;
       }
+      /*else {
+             pbAttr.anyAmount = true;
+           }
 
-      if (!buttonAmount && !amountType) {
-        pbAttr.anyAmount = true;
-        pbAttr.bchAmount = '';
-      }*/
+           if (!buttonAmount && !amountType) {
+             pbAttr.anyAmount = true;
+             pbAttr.bchAmount = '';
+           }*/
 
       // check for "any" amount allowed else convert
       if (pbAttr.anyAmount) {
