@@ -395,14 +395,15 @@ function openModal(pbAttr) {
   if (pbAttr.anyAmount) {
     pbAttr.amountMessage = 'Send any amount of Spice';
     pbAttr.URI = pbAttr.toAddress;
+    startListenForTX(pbAttr);
   } else {
     pbAttr.URI = pbAttr.toAddress + '?amount=' + pbAttr.bchAmount;
     //var bchaddress =
-
+    startListenForTX(pbAttr);
     //startListenForTX(bchaddress);
     //setTimeout(startListenForTX(bchaddress), 1000);
   }
-  startListenForTX(pbAttr);
+
   var qrParams = {
     ecclevel: 'Q',
     fillcolor: '#FFFFFF',
