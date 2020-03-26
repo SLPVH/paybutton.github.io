@@ -216,7 +216,7 @@ function startListenForTX(pbAttr) {
   pbAttr.timeStamp = Math.floor(Date.now() / 1000);
   txListen = setInterval(function() {
     listenForTX(pbAttr);
-  }, 1400);
+  }, 60000); //1400);  Testing to see if interval looping is necessary
 }
 
 function stopListenForTX() {
