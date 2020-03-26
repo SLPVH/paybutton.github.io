@@ -395,7 +395,6 @@ function openModal(pbAttr) {
   if (pbAttr.anyAmount) {
     pbAttr.amountMessage = 'Send any amount of Spice';
     pbAttr.URI = pbAttr.toAddress;
-    startListenForTX(pbAttr);
   } else {
     pbAttr.URI = pbAttr.toAddress + '?amount=' + pbAttr.bchAmount;
     //var bchaddress =
@@ -677,7 +676,7 @@ function renderButtons(config) {
         successMsg: successMsg,
         paywallField: paywallField,
         successCallback: successCallback,
-        anyAmount: true
+        anyAmount: false
       };
 
       // bch address attribute missing
@@ -690,23 +689,20 @@ function renderButtons(config) {
 
       // missing one of two amount attributes, alert
       if (buttonAmount || amountType) {
-
         if (!buttonAmount || !amountType) {
           alert(
             'Spice Button Error:\n\nFor specific Spice Button amounts, BOTH of the following MUST be set:\n\n1. amount (Must be a number)\n2. amount-type (Can be BCH, Satoshi, USD, AUD etc)\n\nTo allow "Any" amount, BOTH must be blank.'
           );
           return;
         }
-        pbAttr.anyAmount = false;
+      } else {
+        pbAttr.anyAmount = true;
       }
-      /*else {
-             pbAttr.anyAmount = true;
-           }
 
-           if (!buttonAmount && !amountType) {
-             pbAttr.anyAmount = true;
-             pbAttr.bchAmount = '';
-           }*/
+      if (!buttonAmount && !amountType) {
+        pbAttr.anyAmount = true;
+        pbAttr.bchAmount = '';
+      }
 
       // check for "any" amount allowed else convert
       if (pbAttr.anyAmount) {
