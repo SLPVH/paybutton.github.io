@@ -664,7 +664,7 @@ function renderButtons(config) {
 
       var bchAmount;
       var amountMessage;
-      var anyAmount;
+      var anyAmount=true;
 
       var pbAttr = {
         buttonAmount: buttonAmount,
@@ -673,7 +673,7 @@ function renderButtons(config) {
         successMsg: successMsg,
         paywallField: paywallField,
         successCallback: successCallback,
-        anyAmount: false
+        anyAmount: true
       };
 
       // bch address attribute missing
@@ -686,20 +686,22 @@ function renderButtons(config) {
 
       // missing one of two amount attributes, alert
       if (buttonAmount || amountType) {
+
         if (!buttonAmount || !amountType) {
           alert(
             'Spice Button Error:\n\nFor specific Spice Button amounts, BOTH of the following MUST be set:\n\n1. amount (Must be a number)\n2. amount-type (Can be BCH, Satoshi, USD, AUD etc)\n\nTo allow "Any" amount, BOTH must be blank.'
           );
           return;
         }
-      } else {
+        pbAttr.anyAmount=false;
+      } /*else {
         pbAttr.anyAmount = true;
       }
 
       if (!buttonAmount && !amountType) {
         pbAttr.anyAmount = true;
         pbAttr.bchAmount = '';
-      }
+      }*/
 
       // check for "any" amount allowed else convert
       if (pbAttr.anyAmount) {
