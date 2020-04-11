@@ -17,6 +17,35 @@ function tabSelect(event) {
     el.classList.remove('active');
   });
 
+  /* Get the documentElement (<html>) to display the page in fullscreen */
+  var elem = document.documentElement;
+
+  /* View in fullscreen */
+  function openFullscreen() {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+  }
+
+  /* goToHomePage() fullscreen */
+  function closeFullscreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { /* Firefox */
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE/Edge */
+      document.msExitFullscreen();
+    }
+  }
+
   // hide all not selected tab content elements
   otherContentEls.forEach(function(el) {
     el.classList.remove('show');
@@ -58,6 +87,7 @@ var runningTotal = 0;
 var runningTotalStr = "0";
 
 function launchPos() {
+
   let address = document.getElementById('slp-address-input').value;
   let currency = document.getElementById('fiat-price-input').value;
   if (address) {
@@ -144,6 +174,7 @@ function getUrlData(str) {
       //   decimalPlaces = obj.decimal;
       //}
       openKeypad();
+      openFullscreen();
     }
     //return obj;
   } else {
@@ -261,6 +292,5 @@ function updateKeypad() {
 // }
 
 function goToHomePage() {
-  //replace this with standard link when site is live.
-  window.open(location.origin);
+  closeFullscreen();
 }
