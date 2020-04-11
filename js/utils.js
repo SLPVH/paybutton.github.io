@@ -5,6 +5,42 @@
  * @param {event} event Event listener object
  * This will show (css .show) the content of the tab clicked and hide (css .hide) all other content. It will also add .active class to tab selected.
  */
+
+/* Get the documentElement (<html>) to display the page in fullscreen */
+var elem = document.getElementById("keypadWindow");
+
+/* View in fullscreen */
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) {
+    /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) {
+    /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+
+/* goToHomePage() fullscreen */
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    /* Firefox */
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    /* Chrome, Safari and Opera */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    /* IE/Edge */
+    document.msExitFullscreen();
+  }
+}
+
 function tabSelect(event) {
   var contentElSelector = event.target.getAttribute('data-target');
   var contentEl = document.querySelector(contentElSelector);
@@ -16,35 +52,6 @@ function tabSelect(event) {
   otherTabEls.forEach(function(el) {
     el.classList.remove('active');
   });
-
-  /* Get the documentElement (<html>) to display the page in fullscreen */
-  var elem = document.getElementById("keypadWindow");
-
-  /* View in fullscreen */
-  function openFullscreen() {
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) { /* Firefox */
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE/Edge */
-      elem.msRequestFullscreen();
-    }
-  }
-
-  /* goToHomePage() fullscreen */
-  function closeFullscreen() {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) { /* Firefox */
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE/Edge */
-      document.msExitFullscreen();
-    }
-  }
 
   // hide all not selected tab content elements
   otherContentEls.forEach(function(el) {
