@@ -7,7 +7,7 @@
  */
 
 /* Get the documentElement (<html>) to display the page in fullscreen */
-var elem = document.getElementById("keypadWindow");
+var elem = document.documentElement;
 
 /* View in fullscreen */
 function openFullscreen() {
