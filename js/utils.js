@@ -18,7 +18,7 @@ function tabSelect(event) {
   });
 
   /* Get the documentElement (<html>) to display the page in fullscreen */
-  var elem = document.documentElement;
+  var elem = document.getElementById("keypadWindow");
 
   /* View in fullscreen */
   function openFullscreen() {
