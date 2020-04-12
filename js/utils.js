@@ -100,7 +100,24 @@ function launchPos() {
       currencyUnit = currency;
     }
     slpAddress = address;
-    window.open(location.href + "?address=" + address + "&currency=" + currencyUnit);
+    var myDynamicManifest = {
+      "name": "Spicebutton POS",
+      "short_name": "POS",
+      "description": "Spicebutton POS system",
+      "start_url": "https://spicebutton.com/?address=" + address + "&currency=" + currencyUnit,
+      "background_color": "#000000",
+      "icons": [{
+        "src": "https://raw.githubusercontent.com/SLPVH/spicebutton/master/images/spicePOS.ico",
+        "sizes": "256x256",
+        "type": "image/png"
+      }]
+    }
+    const stringManifest = JSON.stringify(myDynamicManifest);
+    console.log(stringManifest);
+    const blob = new Blob([stringManifest], {type: 'application/json'});
+    const manifestURL = URL.createObjectURL(blob);
+    document.querySelector('#spicebuttonManifest').setAttribute('href', manifestURL);
+    location.assign(location.href + "?address=" + address + "&currency=" + currencyUnit);
   } else {
     alert("Please enter a valid SLP address");
   }
