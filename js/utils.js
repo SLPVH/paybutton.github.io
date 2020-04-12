@@ -6,40 +6,38 @@
  * This will show (css .show) the content of the tab clicked and hide (css .hide) all other content. It will also add .active class to tab selected.
  */
 
-/* Get the documentElement (<html>) to display the page in fullscreen */
-var elem = document.documentElement;
+function fullscreen() {
+  var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+    (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+    (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+    (document.msFullscreenElement && document.msFullscreenElement !== null);
 
-/* View in fullscreen */
-function openFullscreen() {
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.mozRequestFullScreen) {
-    /* Firefox */
-    elem.mozRequestFullScreen();
-  } else if (elem.webkitRequestFullscreen) {
-    /* Chrome, Safari and Opera */
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) {
-    /* IE/Edge */
-    elem.msRequestFullscreen();
+  var docElm = document.documentElement;
+  if (!isInFullScreen) {
+    document.getElementById("toggleFullscreen").innerHTML = "X";
+    if (docElm.requestFullscreen) {
+      docElm.requestFullscreen();
+    } else if (docElm.mozRequestFullScreen) {
+      docElm.mozRequestFullScreen();
+    } else if (docElm.webkitRequestFullScreen) {
+      docElm.webkitRequestFullScreen();
+    } else if (docElm.msRequestFullscreen) {
+      docElm.msRequestFullscreen();
+    }
+  } else {
+    document.getElementById("toggleFullscreen").innerHTML = "View Fullscreen";
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
   }
 }
 
-/* goToHomePage() fullscreen */
-function closeFullscreen() {
-  if (document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if (document.mozCancelFullScreen) {
-    /* Firefox */
-    document.mozCancelFullScreen();
-  } else if (document.webkitExitFullscreen) {
-    /* Chrome, Safari and Opera */
-    document.webkitExitFullscreen();
-  } else if (document.msExitFullscreen) {
-    /* IE/Edge */
-    document.msExitFullscreen();
-  }
-}
 
 function tabSelect(event) {
   var contentElSelector = event.target.getAttribute('data-target');
