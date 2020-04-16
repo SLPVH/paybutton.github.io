@@ -1,0 +1,13 @@
+{
+    "name": "SpiceButton POS",
+    "short_name": "POS",
+    "start_url": "/index.html",
+    "display": "fullscreen",
+    "background_color": "#000000",
+    "description": "SpiceButton Point of Sale System",
+    "icons": [{
+        "src": "/images/spicePOS.ico",
+        "sizes": "192x192",
+        "type": "image/png"
+    }]
+}
