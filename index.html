@@ -46,7 +46,9 @@
         <form class="" action="" method="post">
           <span>SLP Address:</span>
           <input id="slp-address-input" type="text" name="" value="" placeholder="simpleledger:qr2neczcfzmf5q729jhsj2jg3mcyrmw8vg2tg2ef4x" pattern="^(simpleledger:)?(q|p)[a-z0-9]{41}$"> <br>
-          <select id="currency-selector"></select>
+          <div class="currency-select-container hide">
+            <select id="currency-dropdown"></select>
+          </div>
         </form>
       </div>
       <div class="launch-pos">
@@ -233,8 +235,7 @@
     <!-- </div> -->
     <div></div>
     <div class="proceed">
-      <script src="/js/spicebutton.js">
-      </script>
+      <script src="/js/spicebutton.js"></script>
       <button type="button" name="button" class="spice-button" id="spice-button" button-text="Next" button-text-2="" amount="0" amount-type="USD" address="" success-msg="" paywall-field="" success-callback="">
       </button>
       <button type="button" name="" class="back-button" id="back-button">Back</button>

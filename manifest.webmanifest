@@ -1,6 +1,6 @@
 {
     "name": "SpiceButton POS",
-    "short_name": "POS",
+    "short_name": "Spicebutton",
     "start_url": "/index.html",
     "display": "fullscreen",
     "background_color": "#000000",

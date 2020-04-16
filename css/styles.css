@@ -167,7 +167,7 @@ pre {
   color: white;
 }
 
-/* Form Styling */
+/* Form Stying */
 form > span {
   margin-top: 12px;
   display: block;
@@ -181,20 +181,14 @@ input[type=text], input[type=number] {
   max-width: 300px;
 }
 
+.currency-select-container {
+  margin-top: 2% !important;
+  align-items: center;
+  text-align: center;
+}
+
 #slp-address-input {
-  margin: 0 !important;
-  margin-top: 3% !important;
-  min-width: 100%;
-}
-
-#currency-selector {
-  margin-top: 3% !important;
-  min-width: 100%;
-}
-
-#spice-rate-input::before {
-  background-color: red;
-  content: 'USD';
+  min-width: 100% !important;
 }
 
 /* Global Helper Classes */
@@ -269,7 +263,6 @@ input[type=text], input[type=number] {
   padding-top: 20px;
   width: 100%;
   height: auto;
-  margin: 0 30% 30% 0;
 }
 
 .top .panel {
@@ -340,22 +333,3 @@ input[type=text], input[type=number] {
   background-color: #fff;
   /* color: black !important; */
 }
-
-.back-button {
-  /*all: initial;*/
-  font-family: Helvetica Neu, Arial, sans-serif;
-  font-size: 17px !important;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.08);
-  font-weight: 500;
-  border-radius: 4px;
-  cursor: pointer;
-  border: 2px solid #ff0000;
-  background: white;
-  position: relative;
-  padding: 0px;
-  min-width: 200px;
-  max-width: 280px;
-  text-align: center;
-  display: block;
-  margin-top: 5%;
-  }

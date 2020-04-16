@@ -1,5 +1,54 @@
 /* Main spicebutton.com JavaScript file */
 
+const CURRENCY_SYMBOLS = {
+  ARS: '$ ',
+  AUD: '$ ',
+  CAD: '$ ',
+  USD: '$ ',
+  BMD: '$ ',
+  CLP: '$ ',
+  HKD: '$ ',
+  MXN: '$ ',
+  NZD: '$ ',
+  SGD: '$ ',
+  TWD: '$ ',
+  CNY: '¥ ',
+  JPY: '¥ ',
+  BCH: '₿ ',
+  BTC: '₿ ',
+  AED: 'د.إ ',
+  BDT: '৳ ',
+  BHD: '.د.ب ',
+  BRL: 'R$ ',
+  CZK: 'Kč ',
+  DKK: 'Kr. ',
+  ETH: 'Ξ ',
+  EUR: '€ ',
+  GBP: '£ ',
+  HUF: 'Ft ',
+  IDR: 'Rp ',
+  ILS: '₪ ',
+  INR: '₹ ',
+  KRW: '₩ ',
+  KWD: 'د.ك ',
+  LKR: 'රු ',
+  LTC: 'Ł ',
+  MMK: 'K ',
+  MYR: 'RM ',
+  NOK: 'kr ',
+  SEK: 'kr ',
+  PHP: '₱ ',
+  PKR: 'Rs ',
+  PLN: 'zł ',
+  RUB: '₽ ',
+  SAR: '﷼‎ ',
+  THB: '฿  ',
+  TRY: '₺ ',
+  UAH: '₴ ',
+  VEF: 'Bs ',
+  VND: '₫ ',
+}
+
 window.onload = function() {
   //Load data from localStorage
   var slpAddress = localStorage.getItem('address');
@@ -14,47 +63,15 @@ window.onload = function() {
   let launchButton = document.getElementById('launch-button');
   let posTab = document.getElementById('pos-tab');
   let widgetTab = document.getElementById('widget-tab');
+  let slpText = document.getElementById('slp-address-input');
   let backButton = document.getElementById('back-button');
 
   //Add event listeners to elements
   launchButton.addEventListener('click', launchPos);
   posTab.addEventListener('click', tabSelect);
   widgetTab.addEventListener('click', tabSelect);
+  slpText.addEventListener('input', getCurrencies);
   backButton.addEventListener('click', deleteLocalStorage);
-  
-  getCurrencies();
-}
-
-function fullscreen() {
-  var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
-    (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
-    (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
-    (document.msFullscreenElement && document.msFullscreenElement !== null);
-
-  var docElm = document.documentElement;
-  if (!isInFullScreen) {
-    document.getElementById("toggleFullscreen").innerHTML = "X";
-    if (docElm.requestFullscreen) {
-      docElm.requestFullscreen();
-    } else if (docElm.mozRequestFullScreen) {
-      docElm.mozRequestFullScreen();
-    } else if (docElm.webkitRequestFullScreen) {
-      docElm.webkitRequestFullScreen();
-    } else if (docElm.msRequestFullscreen) {
-      docElm.msRequestFullscreen();
-    }
-  } else {
-    document.getElementById("toggleFullscreen").innerHTML = "View Fullscreen";
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    }
-  }
 }
 
 /**
@@ -98,9 +115,9 @@ function launchPos() {
   var currencyUnit = localStorage.getItem('currency');
 
   let address = document.getElementById('slp-address-input').value;
-  let currency = document.getElementById('currency-selector').value;
+  let currency = document.getElementById('currency-dropdown').value;
   
-  if (address || slpAddress) {
+  if (checkSLPAddress(address) || checkSLPAddress(slpAddress))  {
     currencyUnit = (currency ? currency.toUpperCase() : currencyUnit);
     slpAddress = (address ? address.toLowerCase() : slpAddress);
 
@@ -112,73 +129,19 @@ function launchPos() {
     document.getElementById('spice-button').setAttribute('amount-type', currencyUnit);
 
     //Assign appropriate currency unit
-    currencySymbol = getCurrencySymbol(currencyUnit);
+    currencySymbol = getCurrencySymbol(currencyUnit.toUpperCase());
 
     openKeypad();
-  } else alert('Please enter a valid SLP address');
+  } else alert('Please enter a valid SLP address.');
 }
 
+/**
+ * @param {string} unit The currency unit that is being used
+ * @function
+ * Returns the currency symbol for the specified unit
+ */
 function getCurrencySymbol(unit) {
-  switch (unit) {
-    case 'ARS':
-    case 'AUD':
-    case 'CAD':
-    case 'USD':
-    case 'BMD':
-    case 'CLP':
-    case 'HKD':
-      return '$ ';
-      break;
-    case 'CNY':
-    case 'JPY':
-      return '¥ ';
-      break;
-    case 'BCH':
-    case 'BTC':
-      return '₿ ';
-      break;
-    case 'AED':
-      return 'د.إ ';
-      break;
-    case 'BDT':
-      return '৳ ';
-      break;
-    case 'BHD':
-      return '.د.ب ';
-      break;
-    case 'BRL':
-      return 'R$ ';
-      break;
-    case 'CZK':
-      return 'Kč ';
-      break;
-    case 'DKK':
-      return 'Kr. ';
-      break;
-    case 'ETH':
-      return 'Ξ ';
-      break;
-    case 'EUR':
-      return '€ ';
-      break;
-    case 'GBP':
-      return '£ ';
-      break;
-    case 'HUF':
-      return 'Ft ';
-      break;
-    case 'IDR':
-      return 'Rp ';
-      break;
-    case 'ILS':
-      return '₪ ';
-      break;
-    case 'INR':
-      return '₹ ';
-      break;
-    default:
-      return '';
-  }
+  return CURRENCY_SYMBOLS.hasOwnProperty(unit) ? CURRENCY_SYMBOLS[unit] : '';
 }
 
 function openKeypad() {
@@ -243,32 +206,54 @@ function goToHomePage() {
 
 /**
  * @function
- * Calls XHR to get currencies from coingecko API 
+ * Calls XHR to get currencies from coingecko API if the SLP Address matches the correct RegExp
  */
 function getCurrencies() {
-  let xmlhttp = new XMLHttpRequest();
-  let currencies = ['spice'];
-  xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-      var data = JSON.parse(xmlhttp.responseText).sort();
-      data.forEach(function(c) {
-        currencies.push(c);
-      });
-      displayCurrencies(currencies);
-    }
-  };
-  xmlhttp.open('GET', urls.CURRENCIES_URL, true);
-  xmlhttp.send();
+  if (checkSLPAddress(document.getElementById('slp-address-input').value)) {
+    let xmlhttp = new XMLHttpRequest();
+    let currencies = ['spice'];
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+        var data = JSON.parse(xmlhttp.responseText).sort();
+        data.forEach(function(c) {
+          currencies.push(c);
+        });
+        populateCurrencies(currencies);
+        showCurrencyDropdown();
+      }
+    };
+    xmlhttp.open('GET', urls.CURRENCIES_URL, true);
+    xmlhttp.send();
+  }
+  else {
+    hideCurrencyDropdown();
+  }
 }
 /**
  * @function
  * Formats currencies received from coingecko API and populates currency dropdown for user selection
  */
-function displayCurrencies(currencies) {
-  let fiatDropdown = document.getElementById('currency-selector');
+function populateCurrencies(currencies) {
+  let currencyDropdown = document.getElementById('currency-dropdown');
   currencies.forEach(function(c) {
-    fiatDropdown.innerHTML += '<option value=\"' + c.toUpperCase() + '\">' + c.toUpperCase() + '</option>';
+    currencyDropdown.innerHTML += '<option value=\"' + c.toUpperCase() + '\">' + c.toUpperCase() + '</option>';
   });
+}
+
+function showCurrencyDropdown() {
+  let dropdownContainer = document.querySelector('.currency-select-container')
+  dropdownContainer.classList.add('show');
+  dropdownContainer.classList.remove('hide');
+}
+
+function hideCurrencyDropdown() {
+  let dropdownContainer = document.querySelector('.currency-select-container')
+  dropdownContainer.classList.remove('show');
+  dropdownContainer.classList.add('hide');
+}
+
+function checkSLPAddress(address) {
+  return address ? address.match(/^simpleledger:(q|p)[a-z0-9]{41}/) : false;
 }
 
 function deleteLocalStorage() {
