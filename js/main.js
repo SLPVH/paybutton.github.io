@@ -18,7 +18,7 @@ const CURRENCY_SYMBOLS = {
   BTC: '₿ ',
   AED: 'د.إ ',
   BDT: '৳ ',
-  BHD: '.د.ب ',
+  BHD: 'د.ب ',
   BRL: 'R$ ',
   CZK: 'Kč ',
   DKK: 'Kr. ',
@@ -42,7 +42,7 @@ const CURRENCY_SYMBOLS = {
   PLN: 'zł ',
   RUB: '₽ ',
   SAR: '﷼‎ ',
-  THB: '฿  ',
+  THB: '฿ ',
   TRY: '₺ ',
   UAH: '₴ ',
   VEF: 'Bs ',
@@ -218,7 +218,10 @@ function getCurrencies() {
         data.forEach(function(c) {
           currencies.push(c);
         });
-        populateCurrencies(currencies);
+        let currencyDropdown = document.getElementById('currency-dropdown');
+        currencies.forEach(function(c) {
+          currencyDropdown.innerHTML += '<option value=\"' + c.toUpperCase() + '\">' + c.toUpperCase() + '</option>';
+        });
         showCurrencyDropdown();
       }
     };
@@ -228,16 +231,6 @@ function getCurrencies() {
   else {
     hideCurrencyDropdown();
   }
-}
-/**
- * @function
- * Formats currencies received from coingecko API and populates currency dropdown for user selection
- */
-function populateCurrencies(currencies) {
-  let currencyDropdown = document.getElementById('currency-dropdown');
-  currencies.forEach(function(c) {
-    currencyDropdown.innerHTML += '<option value=\"' + c.toUpperCase() + '\">' + c.toUpperCase() + '</option>';
-  });
 }
 
 function showCurrencyDropdown() {
