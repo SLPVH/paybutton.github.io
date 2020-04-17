@@ -50,23 +50,23 @@ const CURRENCY_SYMBOLS = {
 }
 
 window.onload = function() {
-  //Load data from localStorage
+  // Load data from localStorage
   var slpAddress = localStorage.getItem('address');
   var currencyUnit = localStorage.getItem('currency');
 
-  //Verify localStorage was not empty
+  // Verify localStorage was not empty
   if (slpAddress && currencyUnit) {
     launchPos();
   }
   
-  //Get elements that require event listeners
+  // Get elements that require event listeners
   let launchButton = document.getElementById('launch-button');
   let posTab = document.getElementById('pos-tab');
   let widgetTab = document.getElementById('widget-tab');
   let slpText = document.getElementById('slp-address-input');
   let backButton = document.getElementById('back-button');
 
-  //Add event listeners to elements
+  // Add event listeners to elements
   launchButton.addEventListener('click', launchPos);
   posTab.addEventListener('click', tabSelect);
   widgetTab.addEventListener('click', tabSelect);
@@ -132,6 +132,7 @@ function launchPos() {
     currencySymbol = getCurrencySymbol(currencyUnit.toUpperCase());
 
     openKeypad();
+    createServiceWorker();
   } else alert('Please enter a valid SLP address.');
 }
 
@@ -253,4 +254,17 @@ function deleteLocalStorage() {
   localStorage.removeItem('address');
   localStorage.removeItem('currency');
   location.reload();
+}
+
+function createServiceWorker() {
+  // Register the service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/serviceworker.js')
+    .then(function(registration) {
+      console.log('Registration successful, scope is:', registration.scope);
+    })
+    .catch(function(error) {
+      console.error('Service worker registration failed, error:', error);
+    });
+  }
 }
