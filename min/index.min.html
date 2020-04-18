@@ -1,0 +1,58 @@
+<!doctypehtml><html lang=en><meta charset=utf-8><meta content="width=device-width,initial-scale=1,shrink-to-fit=no"name=viewport><meta content=""name=description><meta content=DuneSquad name=author><title>Spice Button - Coming Soon to BCH SLP</title><link href=/spicebutton.webmanifest rel=manifest id=manifest><link href="https://fonts.googleapis.com/css?family=Ubuntu"rel=stylesheet><link href=/css/styles.css rel=stylesheet><link href=/favicon.ico rel=icon type=image/x-icon><script src=/js/main.js></script><script src=/js/urls.js></script><body class=homepage><div class=header><img alt=""src=/images/spice_master_trans_bg_black_outer_no_text.svg><h1>SpiceButton</h1></div><div class=main><nav class=nav><div class="tabs active nav-pos"id=pos-tab data-target=.pos>Point Of Sale</div><div class="tabs nav-widget"id=widget-tab data-target=.widget>Widget</div></nav><div class="tab-content pos"><h1>Point of Sale</h1><div><form action=""method=post><span>SLP Address:</span> <input id=slp-address-input name=""pattern=^(simpleledger:)?(q|p)[a-z0-9]{41}$ placeholder=simpleledger:qr2neczcfzmf5q729jhsj2jg3mcyrmw8vg2tg2ef4x><br><div class="hide currency-select-container"><select id=currency-dropdown></select></div></form></div><div class=launch-pos><button type=submit id=launch-button><img alt=""src=/images/spice_master_trans_bg_black_outer_no_text.svg> Launch POS</button></div></div><div class="hide tab-content widget"><h1>Widget</h1><div class=documentation><div class=item><h2>All that is needed to embed spicebutton on any site is the following snippet of code:</h2><pre>
+          <code>
+          &lt;script src="spicebutton.com/js/spicebutton.min.js">&lt;/script>
+          &lt;button class="spice-button" address="simpleledger:slp_address_here">&lt;/button>
+          </code>
+        </pre></div><div class=item><h2>The following example can be used to access more features:</h2><pre>
+          <code>
+            &lt;script src="spicebutton.com/js/spicebutton.min.js">&lt;/script>
+                &lt;button
+                class="spice-button"
+                button-text=""
+                button-text-2=""
+                amount=""
+                amount-type=""
+                address="simpleledger:slp_address_here"
+                success-msg=""
+                paywall-field=""
+                success-callback=""
+                >
+              &lt;/button>
+          </code>
+        </pre></div><div class=item><h2>Here is a brief description of each additional attribute:</h2><pre>
+          <code>
+            class="spice-button"
+          </code>
+          </pre><p>spiceButton class/button type: This will be refined in a future release. Choices currently are: ("spice-button", "spice-button rev", "spice-button bare", "spice-button wa", "spice-button warev", "spice-button wabare")</div><div class=item><pre>
+          <code>
+            token-id=""
+          </code>
+        </pre><p>Specify a token to be used other than SPICE Optional</div><div class=item><pre>
+          <code>
+            button-text=""
+          </code>
+        </pre><p>Text that appears inside the button. Example: (button-text="Tip us SPICE!") Optional</div><div class=item><pre>
+          <code>
+            button-text-2=""
+          </code>
+        </pre><p>Button text during hover/selected. Example: (button-text-2="Click to send SPICE"). Optional</div><div class=item><pre>
+          <code>
+            amount=""
+          </code>
+        </pre><p>Amount (units) button is set to. Example: (amount="1"). Optional</div><div class=item><pre>
+          <code>
+            amount-type=""
+          </code>
+        </pre><p>Type of amount. Examples: (amount-type="SPICE", or amount-type="USD", Or 160+ other currency types) Optional</div><div class=item><pre>
+          <code>
+            success-msg=""
+          </code>
+        </pre><p>Message upon successful transaction. Examples: (success-msg="Thanks for supporting spiceButton!")</div><div class=item><pre>
+          <code>
+            paywall-field=""
+          </code>
+        </pre><p>Class name of hidden divs (can be multiple divs with same class name) that you would like to be viewable after successful transaction. Example (paywall-field="prem-content")</div><div class=item><pre>
+          <code>
+            success-callback=""
+          </code>
+        </pre><p>The following will allow those with the know how, to create their own functions/code that are called upon successful transaction.*</div><p>Thanks to the badger wallet, bitcoin.com, soupernerd, and the DuneSquad team. A lot of the credit goes to them for making all of this possible.</div></div></div><div class=keypad id=keypadWindow><div class=top><div class=panel></div><div class=numberArea><p id=numberAreaParagraph>0</div></div><div class=buttonArea><button type=button name=button onclick='keyPress("1")'value=1>1</button> <button type=button name=button onclick='keyPress("2")'value=2>2</button> <button type=button name=button onclick='keyPress("3")'value=3>3</button> <button type=button name=button onclick='keyPress("4")'value=4>4</button> <button type=button name=button onclick='keyPress("5")'value=5>5</button> <button type=button name=button onclick='keyPress("6")'value=6>6</button> <button type=button name=button onclick='keyPress("7")'value=7>7</button> <button type=button name=button onclick='keyPress("8")'value=8>8</button> <button type=button name=button onclick='keyPress("9")'value=9>9</button> <button type=button name=button onclick='keyPress(".")'value=.>.</button> <button type=button name=button onclick='keyPress("0")'value=0>0</button> <button type=button name=button onclick=keyPress(-1) value=del>⇦</button><div class=back-button id=back-button>&lt;</div><div class=proceed><script src=/js/spicebutton.js></script><button type=button name=button address=""amount=0 amount-type=USD button-text=Next button-text-2=""class=spice-button id=spice-button paywall-field=""success-callback=""success-msg=""></button></div></div></div>
