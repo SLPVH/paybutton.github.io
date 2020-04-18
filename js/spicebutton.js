@@ -6,7 +6,7 @@ if (!document.getElementById(cssButtonId)) {
   var link = document.createElement('link');
   link.rel = 'stylesheet';
   link.type = 'text/css';
-  link.href = 'https://spicebutton.com/pre-release/v0.1/css/buttons.css';
+  link.href = '/css/buttons.css';
   link.id = cssButtonId;
   link.media = 'all';
   head.appendChild(link);
@@ -18,7 +18,7 @@ if (!document.getElementById(cssModalId)) {
   var link = document.createElement('link');
   link.rel = 'stylesheet';
   link.type = 'text/css';
-  link.href = 'https://spicebutton.com/pre-release/v0.1/css/modal.css';
+  link.href = '/css/modal.css';
   link.id = cssModalId;
   link.media = 'all';
   head.appendChild(link);
@@ -28,7 +28,7 @@ var qrId = 'pbQR';
 if (!document.getElementById(qrId)) {
   var head = document.getElementsByTagName('head')[0];
   var script = document.createElement('script');
-  script.src = 'https://spicebutton.com/pre-release/v0.1/js/qrjs2.js';
+  script.src = '/js/qrjs2.js';
   script.id = qrId;
   head.appendChild(script);
 }
@@ -196,7 +196,7 @@ function copyBCHURI(address) {
 // * start of transaction audio
 function playAudio() {
   var successAudio = new Audio(
-    'https://spicebutton.com/pre-release/v0.1/audio/pbding.mp3'
+    '/audio/pbding.mp3'
   );
   successAudio.volume = 0.02; // 50%
   successAudio.play();
@@ -508,51 +508,6 @@ function openModal(pbAttr) {
   pbModal.open();
 }
 // * end of open model
-// function convertToBchAddr(simpleledgeraddress) {
-//   var conversion = new XMLHttpRequest();
-//   conversion.open(
-//     'GET',
-//     'https://rest.bitcoin.com/v2/slp/convert/' + simpleledgeraddress,
-//     true
-//   );
-//
-//
-//
-//   conversion.onload = function() {
-//     var addrData = JSON.parse(conversion.responseText);
-//     console.log(addrData["cashAddress"]);
-//     return addrData["cashAddress"];
-//   }
-//   conversion.onerror = function() {
-//     console.log("error");
-//   }
-//   //conversion.send();
-//
-// }
-
-// function convertToBchAddr(simpleledgeraddress) {
-//   var req = new XMLHttpRequest();
-//   const url = 'https://rest.bitcoin.com/v2/slp/convert/' + simpleledgeraddress;
-//   req.open('GET', url, false);
-//   req.send();
-//   var jsonResponse = JSON.parse(req.responseText);
-//   var bcha = jsonResponse["cashAddress"];
-//   console.log(bcha);
-//   startListenForTX(bcha);
-//
-//   //return bcha;
-// }
-
-
-// * start of begin function query to obtain bch price
-// * function getBCHPrice(pbAttr) {
-// *   var fiatRequest = new XMLHttpRequest();
-// *   fiatRequest.open(
-// *     'GET',
-// *     'https://index-api.bitcoin.com/api/v0/cash/price/' + pbAttr.amountType,
-// *     true
-// *   );
-
 
 function getBCHPrice(pbAttr) {
   var fiatRequest = new XMLHttpRequest();

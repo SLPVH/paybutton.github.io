@@ -157,10 +157,6 @@ nav .nav-widget {
   text-align: center;
 }
 
-.widget {
-
-}
-
 .widget * {
   margin-top: 12px;
 }
@@ -185,13 +181,20 @@ input[type=text], input[type=number] {
   max-width: 300px;
 }
 
-#fiat-price-input {
-  margin: 0 !important;
+.currency-select-container {
+  margin-top: 2% !important;
+  align-items: center;
+  text-align: center;
 }
 
-#spice-rate-input::before {
-  background-color: red;
-  content: 'USD';
+#currency-dropdown {
+  background-color: white;
+  font-size: larger;
+  color: red;
+}
+
+#slp-address-input {
+  min-width: 100% !important;
 }
 
 /* Global Helper Classes */
@@ -237,6 +240,7 @@ input[type=text], input[type=number] {
   font-size: 10vh;
   border: 2px solid black;
   outline: none;
+  cursor: pointer;
 }
 
 .buttonArea button:active {
@@ -335,4 +339,12 @@ input[type=text], input[type=number] {
 .paybutton-modal.fade-and-drop.paybutton-open {
   background-color: #fff;
   /* color: black !important; */
+}
+
+.back-button {
+  display: block;
+  padding-top: 12px;
+  font-size: 4em;
+  font-weight: bolder;
+  cursor: pointer;
 }
