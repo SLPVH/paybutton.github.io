@@ -49,13 +49,16 @@ const CURRENCY_SYMBOLS = {
   VND: '₫ ',
 }
 
+localStorage.setItem('reloadFlag', false);
+
 window.onload = function() {
   // Load data from localStorage
   var slpAddress = localStorage.getItem('address');
   var currencyUnit = localStorage.getItem('currency');
+  var reloadFlag = localStorage.getItem('reloadFlag');
 
   // Verify localStorage was not empty
-  if (slpAddress && currencyUnit) {
+  if (slpAddress && currencyUnit && !reloadFlag) {
     launchPos();
   }
   
@@ -71,7 +74,13 @@ window.onload = function() {
   posTab.addEventListener('click', tabSelect);
   widgetTab.addEventListener('click', tabSelect);
   slpText.addEventListener('input', getCurrencies);
-  backButton.addEventListener('click', deleteLocalStorage);
+  backButton.addEventListener('click', reload);
+
+  // Repopulate SLP Address
+  if (slpAddress) {
+    slpText.value = slpAddress;
+    getCurrencies();
+  }
 }
 
 /**
@@ -250,9 +259,8 @@ function checkSLPAddress(address) {
   return address ? address.match(/^simpleledger:(q|p)[a-z0-9]{41}/) : false;
 }
 
-function deleteLocalStorage() {
-  localStorage.removeItem('address');
-  localStorage.removeItem('currency');
+function reload() {
+  localStorage.setItem('reloadFlag', true);
   location.reload();
 }
 
