@@ -234,6 +234,7 @@ input[type=text], input[type=number] {
   font-size: 10vh;
   border: 2px solid black;
   outline: none;
+  cursor: pointer;
 }
 
 .buttonArea button:active {
@@ -339,4 +340,5 @@ input[type=text], input[type=number] {
   padding-top: 12px;
   font-size: 4em;
   font-weight: bolder;
+  cursor: pointer;
 }
