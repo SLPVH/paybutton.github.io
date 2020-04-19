@@ -6,7 +6,7 @@ if (!document.getElementById(cssButtonId)) {
   var link = document.createElement('link');
   link.rel = 'stylesheet';
   link.type = 'text/css';
-  link.href = '/css/buttons.css';
+  link.href = 'https://spicebutton.com/css/buttons.css';
   link.id = cssButtonId;
   link.media = 'all';
   head.appendChild(link);
@@ -18,7 +18,7 @@ if (!document.getElementById(cssModalId)) {
   var link = document.createElement('link');
   link.rel = 'stylesheet';
   link.type = 'text/css';
-  link.href = '/css/modal.css';
+  link.href = 'https://spicebutton.com/css/modal.css';
   link.id = cssModalId;
   link.media = 'all';
   head.appendChild(link);
@@ -28,7 +28,7 @@ var qrId = 'pbQR';
 if (!document.getElementById(qrId)) {
   var head = document.getElementsByTagName('head')[0];
   var script = document.createElement('script');
-  script.src = '/js/qrjs2.js';
+  script.src = 'https://spicebutton.com/js/qrjs2.js';
   script.id = qrId;
   head.appendChild(script);
 }
